@@ -24,8 +24,8 @@ const metersToMiles = (meters: number) => {
 
 type props = {
   prop: any;
-  parents: any;
-  // baseUrl: any;
+  //parents: any;
+  //baseUrl: any;
   coords: any;
   slug: any;
   timezone: any;
@@ -44,9 +44,13 @@ const NearByLocation = (result: props) => {
       setTimeStatus("");
     }
   };
+  console.log(result.timezone,"timezone");
+
+  
 //console.log(result,"site");
   const [data, setData] = useState([]);
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+  
   useEffect(() => {
     let distance: any = [];
     let arr: any = [];
@@ -77,7 +81,7 @@ const NearByLocation = (result: props) => {
               {/* {result.nearByWellPharmaciesTitle
                 ? result.nearByWellPharmaciesTitle
                 : "Nearby Well Pharmacies"} */}
-                 {result.site.c_nearbyLocationsHeading}
+                 {result.site.c_nearbyLocationsHeading?result.site.c_nearbyLocationsHeading:"Near by Locations"}
             </h2>
           </div>
           <Splide
@@ -215,7 +219,7 @@ const NearByLocation = (result: props) => {
                             <Link href={`${url}`}>{e.name}</Link>
                           </h3>
                           <p className="miles">
-                            {metersToMiles(e.distance ?? 0)} {result.site.c_miles}
+                            {metersToMiles(e.distance ?? 0)} {result.site.c_miles?result.site.c_miles:"Miles"}
                           </p>
                         </div>
 
@@ -247,7 +251,7 @@ const NearByLocation = (result: props) => {
 
                                   <OpenCloseStatus
                                     timezone={
-                                      timezone ? timezone : defaultTimeZone
+                                      result.timezone ? result.timezone : defaultTimeZone
                                     }
                                     hours={e.hours}
                                     site={e.site}

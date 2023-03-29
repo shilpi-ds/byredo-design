@@ -52,6 +52,7 @@ export interface GoogleMapsProps {
   alternateResult: any;
   activeIndex: number | null;
   setActiveIndex: any;
+  site?:any;
 }
 
 type UnwrappedGoogleMapsProps = Omit<GoogleMapsProps, "apiKey" | "locale">;
@@ -93,6 +94,7 @@ function UnwrappedGoogleMaps({
   providerOptions,
   customCssClasses,
   check,
+  site,
 }: UnwrappedGoogleMapsProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map>();
@@ -533,6 +535,7 @@ function UnwrappedGoogleMaps({
   const { t, i18n } = useTranslation();
   /** Function InfowindowContents returns Html*/
   function InfowindowContents(i: Number, result: any): void {
+    console.log('result.rawData.timezone', result.rawData.timezone)  
     var url = "";
     if (!result.rawData.slug) {
       let slugString = result?.id + " " + result?.name;
@@ -541,7 +544,7 @@ function UnwrappedGoogleMaps({
     } else {
       url = `${result.rawData.slug.toString()}.html`;
     }
-
+    console.log('result.rawdata', result.rawData)
     const MarkerContent = (
       <div className="markerContent">
         <div className="miles-with-title">
@@ -569,11 +572,12 @@ function UnwrappedGoogleMaps({
                 <div className="openStatus">
                   <OpenCloseStatus
                     hours={result?.rawData?.hours}
+                    site={site} 
                     timezone={
-                      result.rawData.timezone
-                        ? result.rawData.timezone
+                      result?.rawData?.timezone
+                        ? result?.rawData?.timezone
                         : defaultTimeZone
-                    }
+                    }               
                   />
                 </div>
               </>
@@ -587,7 +591,9 @@ function UnwrappedGoogleMaps({
         <div className="buttons">
           <div className="ctaBtn">
             <Link className="button" href={`${url}`}>
-              {t("View Details")}
+            {site.c_viewStationDetails
+              ? site.c_viewStationDetails
+              : t("View Details")}
             </Link>
           </div>
 

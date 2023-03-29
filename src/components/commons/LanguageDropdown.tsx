@@ -9,7 +9,7 @@ function LocalesDropdown(props: any) {
   const [language, setLanguage] = useState("");
   const [section, setSection] = useState(0);
   const [locale, setLocale] =useState("");
-  let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
+  //let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
   const onLanguageChange = (e: any) => 
   {
   setLanguage(e.target.value);
@@ -18,16 +18,19 @@ function LocalesDropdown(props: any) {
   const { t, i18n } = useTranslation();
 
 
-//console.log(props,"site meta")
+/**
+ * For country dropdown
+ * @param e 
+ */
 
   const handleClick = (e:any) => {
     setSection(e.target.value);
     setLanguage(props.country[e.target.value].language[0].languageCode);
-    console.log(props.country[e.target.value].language[0].languageCode,"locale");
+    //console.log(props.country[e.target.value].language[0].languageCode,"locale");
     props.updatelocale(props.country[e.target.value].language[0].languageCode);
   //setLanguage();
    setLocale(e.target[e.target.value].text);
- console.log(locale);
+ //console.log(locale);
 
     
   };
@@ -47,31 +50,15 @@ function LocalesDropdown(props: any) {
       }
    })
    setSection(finalresult[0].index);
+   setLanguage(props.country[finalresult[0].index].language[0].languageCode);
   },[])
   
-  //  useEffect(()=>{
-    
-  //   //setLanguage(props.country[section].language[0].languageCode);
-  //   console.log(props);
-  //   setLanguage(props.country[section].language[0].languageCode);
-  
-  //   console.log(props.country[section].language[0].languageCode,"langsssssss");
-  
-  //   //var language=props.country[section].language[0].languageCode;
-  //     console.log(language,"lang");
-      
-   
-  //   //  if(props.country[section].language[0].languageCode!== props.site.meta.locale){
-  //   // //console.log(props.country[section].language[0].languageCode)
-  //   //   props.updatelocale(props.country[section].language[0].languageCode);
-  //   //  }
-  //  },[section])
-
+ 
   return (
     <div>
       <form>
       
-        <select onChange={(e) =>handleClick(e)}>
+        <select onChange={(e) =>handleClick(e)} value={section}>
         {props.country?.map((e: any,ind:any) => {
          
                   return (
@@ -88,7 +75,7 @@ function LocalesDropdown(props: any) {
                     {props.country[section].language?.map((el: any,indd:number) => {
                         
                           const selected=(props.site.meta.locale === el.languageCode) ? true : false;
-                       console.log(props.site.meta.locale,language,"m");
+                       //console.log(props.site.meta.locale,language,"m");
                               return (
                               
                                    <option value={el.languageCode} key={indd} selected={props.site.meta.locale === language}>{el.language}</option>

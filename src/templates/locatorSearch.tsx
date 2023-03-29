@@ -275,7 +275,8 @@ const LocatorSearch: Template<TemplateRenderProps> = ({
             ByredoLogo={_site.c_byradoLogo}
             ByredoLinks={_site.c_headerMenus}
           />
-          <LocatorBread />
+          <LocatorBread 
+          site={_Site}/>
 
           <SearchHeadlessProvider
             experienceKey={AnswerExperienceConfig.experienceKey}

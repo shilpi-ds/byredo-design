@@ -78,22 +78,19 @@ export const config: TemplateConfig = {
       "c_mapImage",
       "c_promotionalProducts",
       "timezone",
-      /*Banner*/
-      //"c_bannerImage",
-      //"c_bannerTitle",
-      //"c_bannerDescription",
+     
 
       /*About Byredo*/
       "c_image",
       "c_title",
       "c_readMore",
       "description",
-      //"c_aboutImages",
+      
       /*PhotoGallery*/
       "c_photoGalleryTitle",
-      //"c_locationServices",
+      
       "c_locationServices.name",
-      //"photoGallery",
+      
 
       /*FAQ's*/
       "c_faqsTitle",
@@ -106,7 +103,7 @@ export const config: TemplateConfig = {
       "c_metaDescription",
       "c_metaTitle",
       "c_robotsTag",
-
+/*dm pages */
       "dm_directoryParents.name",
       "dm_directoryParents.slug",
       "dm_directoryParents.meta.entityType",
@@ -360,22 +357,18 @@ const Location: Template<ExternalApiRenderData> = ({
     c_canonicalURL,
     c_photoGalleryTitle,
     c_mapImage,
-    //photoGallery,
+ 
     geomodifier,
     c_faqsDescription,
-    //c_bannerImage,
-    // c_bannerTitle,
-    // c_bannerDescription,
+   
     geocodedCoordinate,
 
     dm_directoryParents,
     dm_directoryChildren
   } = document;
-  console.log('timezone1', timezone)
-  //console.log(c_locationServices,"services");
-  //console.log(c_promotionalProducts,"gallery");
+
   let templateData = { document: document, __meta: __meta };
-  //const { t, i18n } = useTranslation();
+  
   let hoursSchema = [];
   let breadcrumbScheme = [];
   for (var key in hours) {
@@ -477,29 +470,7 @@ const Location: Template<ExternalApiRenderData> = ({
         }} */}
       {/* /> */}
 
-      {c_relatedFaqs && (
-        <>
-          <JsonLd<FAQPage>
-            item={{
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-
-              mainEntity:
-                c_relatedFaqs &&
-                c_relatedFaqs.map((i: any) => {
-                  return {
-                    "@type": "Question",
-                    name: i.question,
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: `<p>${i.answer}</p>`,
-                    },
-                  };
-                }),
-            }}
-          />
-        </>
-      )}
+      
 
       <AnalyticsProvider
         templateData={templateData}
@@ -514,39 +485,12 @@ const Location: Template<ExternalApiRenderData> = ({
           />
 
 
-
-          {/* <div className="hero mx-auto">
-            <img
-              className="heroBanner"
-              src={
-                c_bannerImage?.url
-                  ? c_bannerImage.url
-                  : "https://a.mktgcdn.com/p-sandbox/MwudZ3MdxtTHmW9Jz3gEAC5LcWcO6gj-8oVv77su3B8/3400x700.jpg"
-              }
-              alt="Banner Image"
-            />
-            <div className="hero-content">
-              <h1>{c_bannerTitle ? c_bannerTitle : name}</h1>
-              <p className="text-xl">
-                {c_bannerDescription
-                  ? c_bannerDescription
-                  : "Makeup Beauty Products Website"}
-              </p>
-            </div>
-          </div> */}
           <BreadCrumbs
             name={name}
             parents={dm_directoryParents}
             address={address}
           ></BreadCrumbs>
-          {/* <div className="store-time text-5xl text-center font-semibold mb-4">
-            {hours && (
-              <OpenCloseStatus
-                timezone={timezone ? timezone : defaultTimeZone}
-                hours={hours ? hours : ""} site={_site}
-              ></OpenCloseStatus>
-            )}
-          </div> */}
+      
           <LocationInformation
             prop={hours}
             coords={yextDisplayCoordinate}
@@ -559,11 +503,12 @@ const Location: Template<ExternalApiRenderData> = ({
             name={name}
             services={c_locationServices}
           />
+          {c_mapImage && (
           <MapImage image={c_mapImage}
             coords={yextDisplayCoordinate}
             address={address}
           />
-
+          )}
           <div className="mt-8 md:mt-10">
             {c_title && (
               <About
@@ -586,16 +531,11 @@ const Location: Template<ExternalApiRenderData> = ({
 
             />
           )}
-          {/* {c_faqsTitle && c_relatedFaqs && (
-            <div className="mt-5 md:mt-10">
-              <Faq prop={c_relatedFaqs} faq_title={c_faqsTitle} />
-            </div>
-          )} */}
-
+      
           <NearByLocation
             prop={externalApiData}
             // parents={dm_directoryParents}
-            baseUrl={relativePrefixToRoot}
+            //BaseUrl={relativePrefixToRoot}
             coords={yextDisplayCoordinate}
             slug={slug}
             timezone={timezone}

@@ -39,7 +39,7 @@ const todayIndex = new Date().getDay();
 
 /**
  * Dynamically creates a sort order based on today's day.
- * it returns Day
+ * it returns Days
  */
 
 function getSorterForCurrentDay(): { [key: string]: number } {

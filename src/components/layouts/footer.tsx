@@ -11,6 +11,12 @@ type props = {
   emailAddress: any;
   path:any;
 };
+
+/**
+ * @param props 
+ * @returns HTML elements of Footer Component
+ */
+
 const Footer = (props: any) => {
   const {
     emailAddress,
@@ -105,13 +111,13 @@ const Footer = (props: any) => {
         </div>
       </div>
 
+
+{/* Cookie Consent Section is for "To keep a user logged in as they browse from page to page." */}
       <CookieConsent
         buttonText={_site.c_cookieButton?.label}
         buttonStyle={{
           marginLeft: "100px",
-        }}
-      >
-         
+        }}>        
         <p>
         {_site.c_cookieText}
           <Link className="text-cookies-link p-2 font-bold" href={_site.c_cookiePolicy?.link}>

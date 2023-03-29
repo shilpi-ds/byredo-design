@@ -6,6 +6,11 @@ ByredoLogo: any;
 ByredoLinks: any;
 };
 
+/**
+ * 
+ * @param props 
+ * @returns HTML elements of Header Component
+ */
 const Header = (props: any) => {
   const {ByredoLogo, ByredoLinks } = props;
   return (

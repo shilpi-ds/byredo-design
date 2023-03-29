@@ -1,15 +1,19 @@
 import { Link } from "@yext/pages/components";
 import { useTranslation } from "react-i18next";
 import * as React from "react";
-import { svgIcons } from "../../svg icons/svgIcon";
-const LocatorBread = (props: any) => {
+/**
+ * 
+ * @param props 
+ * @returns Return HTML Elements of Locator Breadcrumb
+ */
+const LocatorBread = (props:{ site: any;}) => {
   const { t, i18n } = useTranslation();
     return (
         <div className="breadcrumb">
             <ul>
               <li>
                 <Link href="#">
-               {t("Home")}
+                  {props.site.c_home ? props.site.c_home : t("Home")}
                 </Link>
               </li>
              
@@ -18,4 +22,4 @@ const LocatorBread = (props: any) => {
         </div>
       );
     };
-    export default LocatorBread;
+export default LocatorBread;

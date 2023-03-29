@@ -14,9 +14,11 @@ const MapImage = (props: any) => {
   return (
     <>
       <div className="lg:flex lg:justify-between mt-[60px]">
+      {props.image.image.url && (
         <div className="lg:w-[50%] sm:mb-5">
         <img src={props.image.image.url} alt=""/>
         </div>
+        )}
         <div className="lg:w-[49%]">
         <CustomMap prop={props.coords} />
         </div>
@@ -26,4 +28,3 @@ const MapImage = (props: any) => {
 };
 
 export default MapImage;
-

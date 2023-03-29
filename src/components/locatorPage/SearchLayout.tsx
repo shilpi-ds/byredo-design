@@ -137,6 +137,7 @@ const SearchLayout = (props: any): JSX.Element => {
               setZoomLevel={setZoomlevel}
               showEmptyMap={true}
               check={check}
+              site={_site}
               locationResults={locationResults}
               alternateResult={alternateResult}
               activeIndex={activeIndex}

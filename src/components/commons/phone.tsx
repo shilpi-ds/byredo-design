@@ -1,6 +1,12 @@
 import * as React from "react";
 import { formatPhoneNumber } from "react-phone-number-input";
 import { Link } from "@yext/pages/components";
+
+/**
+ * 
+ * @param props 
+ * @returns html element of phone component.
+ */
 const Phone = (props: any) => {
   const { phone } = props;
   const formattedPhone = formatPhoneNumber(phone);

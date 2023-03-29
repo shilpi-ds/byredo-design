@@ -21,7 +21,7 @@ export interface InputDropdownCssClasses {
 interface Props {
   inputValue?: string,
   placeholder?: string,
-  screenReaderInstructions: string,
+  screenReaderInstructions?: string,
   screenReaderText: string,
   onlyAllowDropdownOptionSubmissions?: boolean,
   forceHideDropdown?: boolean,
@@ -34,6 +34,7 @@ interface Props {
   cssClasses?: InputDropdownCssClasses,
   handleSetUserShareLocation: (value: string, userShareStatus:boolean) => void,
   handleInputValue: () => void,
+  params?: any;
   errorstatus:any,
  setErrorStatus:any,
 }

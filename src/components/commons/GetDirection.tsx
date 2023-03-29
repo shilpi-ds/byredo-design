@@ -1,4 +1,8 @@
 const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+/**
+ * This is an GetDirection Component which returns the Store address in Google map.
+ * @param entitiy 
+ */
 export default function getDirectionUrl(entitiy: any) {
   var address_string = "";
   address_string =

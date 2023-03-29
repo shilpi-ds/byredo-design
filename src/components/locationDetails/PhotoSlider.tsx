@@ -11,7 +11,7 @@ const PhotoSlider = (props: any) => {
   const photo = photos?.map((element:any) => (     
    <div className="relative inline-block">
        <img className="max-h-[25.188rem] w-full" src={element?.image?.url} alt=""/>
-       <span className="absolute bottom-0 left-0 right-0 text-center text-[18px] pb-4"> {element.description}</span>
+       <span className="absolute bottom-0 left-0 right-0 text-center text-[18px] pb-4"> {element?.description}</span>
    </div>
     
   ));
