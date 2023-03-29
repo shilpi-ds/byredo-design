@@ -2,7 +2,7 @@ import * as React from "react";
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from "react-i18next";
 import { withTranslation } from "react-i18next";
-import "../../types/i18n.ts";
+//import "../../types/i18n.tsx";
 //import $ from "jquery";
 function LocalesDropdown(props: any) {
   //console.log(props,"ggggggggggggg");
@@ -23,7 +23,7 @@ function LocalesDropdown(props: any) {
     setSection(e.target.value);
     setLanguage(props.country[e.target.value].language[0].languageCode);
     console.log(props.country[e.target.value].language[0].languageCode,"locale");
-   // props.updatelocale(props.country[e.target.value].language[0].languageCode);
+    props.updatelocale(props.country[e.target.value].language[0].languageCode);
   //setLanguage();
    setLocale(e.target[e.target.value].text);
  console.log(locale);
