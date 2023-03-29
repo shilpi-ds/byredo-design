@@ -9,6 +9,7 @@ function LocalesDropdown(props: any) {
   const [language, setLanguage] = useState("");
   const [section, setSection] = useState(0);
   const [locale, setLocale] =useState("");
+  let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
   const onLanguageChange = (e: any) => 
   {
   setLanguage(e.target.value);
@@ -23,13 +24,30 @@ function LocalesDropdown(props: any) {
     setSection(e.target.value);
     setLanguage(props.country[e.target.value].language[0].languageCode);
     console.log(props.country[e.target.value].language[0].languageCode,"locale");
-    props.updatelocale(props.country[e.target.value].language[0].languageCode);
+    //props.updatelocale(props.country[e.target.value].language[0].languageCode);
   //setLanguage();
    setLocale(e.target[e.target.value].text);
  console.log(locale);
 
     
   };
+  useEffect(()=>{
+    
+    // console.log(props.country)
+   const Result = props.country?.filter((res:any,index:number)=>{
+         return  res.language && res.language.map((inr:any)=>{
+           if(inr.languageCode === props.site.meta.locale){
+           return  res.index = index
+           }
+        })
+      })
+    const finalresult =Result && Result.filter((res:any)=>{
+      if(res.hasOwnProperty('index')){
+       return res
+      }
+   })
+   setSection(finalresult[0].index);
+  },[])
   
   //  useEffect(()=>{
     
@@ -70,10 +88,10 @@ function LocalesDropdown(props: any) {
                     {props.country[section].language?.map((el: any,indd:number) => {
                         
                           const selected=(props.site.meta.locale === el.languageCode) ? true : false;
-                       
+                       console.log(props.site.meta.locale,language,"m");
                               return (
                               
-                                   <option value={el.languageCode} key={indd} selected={props.site.meta.locale === el.languageCode}>{el.language}</option>
+                                   <option value={el.languageCode} key={indd} selected={props.site.meta.locale === language}>{el.language}</option>
                                 
                               );
                             })}
