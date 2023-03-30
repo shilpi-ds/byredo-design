@@ -52,7 +52,8 @@ function LocalesDropdown(props: any) {
          return  res.language && res.language.map((inr:any)=>{
            if(inr.languageCode === props.site.meta.locale){
             console.log(inr.languageCode,"hhhh");
-           return  res.index = index
+            setLanguage(inr.languageCode);
+           return  res.index = index;
            }
         })
       })
@@ -63,35 +64,10 @@ function LocalesDropdown(props: any) {
    })
    console.log(finalresult[0].index);
    setSection(finalresult[0].index);
-   setLanguage("de-DE");
    console.log(props.country[finalresult[0].index].language[0].languageCode,"lang");
   },[])
 
-  useEffect(()=>{
-    
-    // console.log(props.country)
-   const loc = props.country?.filter((res:any,index:number)=>{
-         return  res.language && res.language.map((inr:any)=>{
-           if(inr.languageCode === props.site.meta.locale){
-            console.log(inr.languageCode,"hhhh");
-           //return  inr.languageCode
-           setLanguage(inr.languageCode);
-           }
-        })
-      })
-  //   const finalresult =Result && Result.filter((res:any)=>{
-  //     if(res.hasOwnProperty('index')){
-  //      return res
-  //     }
-  //  })
-   //console.log(finalresult[0].index);
-   //setSection(finalresult[0].index);
-   console.log(loc,"ggg");
-   //setLanguage(loc);
-   //console.log(props.country[finalresult[0].index].language[0].languageCode,"lang");
-  },[])
-
- 
+  
   
   /**
    * Return content for country & language dropdown
