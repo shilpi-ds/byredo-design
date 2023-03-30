@@ -15,6 +15,8 @@ function LocalesDropdown(props: any) {
   setLanguage(e.target.value);
   console.log(e.target.value);
   props.updatelocale(e.target.value);
+  setSection(props.country[section].index);
+  console.log(props.country[section].index,"country");
   };
   const { t, i18n } = useTranslation();
 
