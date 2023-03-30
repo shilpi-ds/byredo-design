@@ -13,6 +13,7 @@ function LocalesDropdown(props: any) {
   const onLanguageChange = (e: any) => 
   {
   setLanguage(e.target.value);
+  console.log(e.target.value);
   props.updatelocale(e.target.value);
   };
   const { t, i18n } = useTranslation();
@@ -26,8 +27,8 @@ function LocalesDropdown(props: any) {
   const handleClick = (e:any) => {
     setSection(e.target.value);
     setLanguage(props.country[e.target.value].language[0].languageCode);
-    //console.log(props.country[e.target.value].language[0].languageCode,"locale");
-    props.updatelocale(props.country[e.target.value].language[0].languageCode);
+    console.log(props.country[e.target.value].language[0].languageCode,"locale");
+   props.updatelocale(props.country[e.target.value].language[0].languageCode);
   //setLanguage();
    setLocale(e.target[e.target.value].text);
  //console.log(locale);
@@ -49,8 +50,10 @@ function LocalesDropdown(props: any) {
        return res
       }
    })
+   //console.log(finalresult[0].index);
    setSection(finalresult[0].index);
    setLanguage(props.country[finalresult[0].index].language[0].languageCode);
+   console.log(props.country[finalresult[0].index].language[0].languageCode,"lang");
   },[])
   
  
@@ -74,7 +77,7 @@ function LocalesDropdown(props: any) {
              
                     {props.country[section].language?.map((el: any,indd:number) => {
                         
-                          const selected=(props.site.meta.locale === el.languageCode) ? true : false;
+                         //const selected=(props.site.meta.locale === el.languageCode) ? true : false;
                        //console.log(props.site.meta.locale,language,"m");
                               return (
                               
