@@ -50,10 +50,10 @@ function LocalesDropdown(props: any) {
        return res
       }
    })
-   //console.log(finalresult[0].index);
+   console.log(finalresult[0].index);
    setSection(finalresult[0].index);
-   setLanguage(props.country[finalresult[0].index].language[0].languageCode);
-   console.log(props.country[finalresult[0].index].language[0].languageCode,"lang");
+   //setLanguage(props.country[finalresult[0].index].language[0].languageCode);
+   //console.log(props.country[finalresult[0].index].language[0].languageCode,"lang");
   },[])
   
  
