@@ -7,6 +7,12 @@ type props = {
   
 };
 
+/**
+ * For promotion section with image,title,description & CTA
+ * @param props 
+ * @returns 
+ */
+
 const Promotion = (props: any) => {
   //const { image,map} = props;  
 //console.log(props,"promo");

@@ -34,8 +34,8 @@ import {
   GoogleSearchConsole,
   BaseUrl,
   AnalyticsEnableDebugging,
-  AnalyticsEnableTrackingCookie,
-} from "../config/globalConfig";
+  AnalyticsEnableTrackingCookie }
+  from "../config/globalConfig";
 import {
   savedFilterId,
   entityTypes,

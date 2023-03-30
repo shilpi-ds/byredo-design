@@ -107,7 +107,7 @@ const BreadCrumbs = (props: data) => {
     <div className="breadcrumb">
       <div className="container">
         <ul>
-          <li className="home-li">
+          <li className="home">
             <Link href="/index.html">Home</Link>
           </li>
           {list && (

@@ -6,12 +6,23 @@ var style = {
   height: "310px",
 };
 
+/**
+ * For category section with image, title & link
+ * @param props 
+ * @returns 
+ */
 const PhotoSlider = (props: any) => {
+  //console.log(props,"photo");
   const { photos, height, width,photoGalleryTitle} = props;  
   const photo = photos?.map((element:any) => (     
    <div className="relative inline-block">
        <img className="max-h-[25.188rem] w-full" src={element?.image?.url} alt=""/>
+       { element?.clickthroughUrl &&
+       <a href={element?.clickthroughUrl}><span className="absolute bottom-0 left-0 right-0 text-center text-[18px] pb-4"> {element?.description}</span></a>
+}
+{ !element?.clickthroughUrl &&
        <span className="absolute bottom-0 left-0 right-0 text-center text-[18px] pb-4"> {element?.description}</span>
+}
    </div>
     
   ));
