@@ -302,8 +302,10 @@ const openClose = {
 };
 
 export default function OpenCloseStatus(props: {timezone: any;
+  
   hours: { reopenDate: any };
   site: any;}) {
+    //console.log(props,"loc");
 const { t } = useTranslation();
   return (
     <div className="">

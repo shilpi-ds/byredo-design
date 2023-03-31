@@ -80,8 +80,8 @@ const FourOhFour: Template<TemplateRenderProps> = ({ document, path }) => {
     var Desc = RtfConverter.toHTML(_site.c_fourDes);
   }
   const { t, i18n } = useTranslation();
-  i18n.changeLanguage(document.meta.locale);
-  useUpdateTranslation(_site, document.meta.locale);
+  //i18n.changeLanguage(document.meta.locale);
+  //useUpdateTranslation(_site, document.meta.locale);
   // console.log(_site,"site");
   var currentUrl = "";
   const myArray = path.split("/");
@@ -109,7 +109,7 @@ const FourOhFour: Template<TemplateRenderProps> = ({ document, path }) => {
 
       <div className="content-list ">
         <div className="container mx-96">
-          <h1 className="text-2xl">{_site.c_fourTitle}.</h1>
+          <h1 className="text-2xl">{_site.c_fourTitle?_site.c_fourTitle:"Our apologies, we we are not able to find the page you are looking for.."}</h1>
           <br />
           <div
             className="leading-7 text-base text-gray-700 about-content"
@@ -117,7 +117,7 @@ const FourOhFour: Template<TemplateRenderProps> = ({ document, path }) => {
           ></div>
           <br />
           <form className="max-w-sm px-0">
-            <div className="relative mb-4">
+            {/* <div className="relative mb-4">
               <input
                 type="text"
                 placeholder={t("Search")}
@@ -137,7 +137,7 @@ const FourOhFour: Template<TemplateRenderProps> = ({ document, path }) => {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-            </div>
+            </div> */}
           </form>
           <div className="">
             <div className="text-2xl pb-3 font-semibold">{t("Go to")}</div>

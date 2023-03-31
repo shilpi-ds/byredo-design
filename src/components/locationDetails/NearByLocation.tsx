@@ -44,19 +44,22 @@ const NearByLocation = (result: props) => {
       setTimeStatus("");
     }
   };
-  console.log(result.timezone,"timezone");
+  //console.log(result.timezone,"timezone");
 
   
-//console.log(result,"site");
+//console.log(result.site,"site");
   const [data, setData] = useState([]);
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
   
   useEffect(() => {
     let distance: any = [];
     let arr: any = [];
+    let timezone: any = [];
     distance.push(result.prop.response.distances);
-
+    //timezone.push(result.prop.response.timezone)
+//console.log(result.prop.response.data.timezone,"res");
     result?.prop?.response?.results?.map((i: any, index: any) => {
+      //console.log(i,"res");
       arr.push({
         slug: i.data?.slug,
         address: i.data?.address,
@@ -65,8 +68,10 @@ const NearByLocation = (result: props) => {
         name: i.data?.name,
         yextDisplayCoordinate: i.data?.yextDisplayCoordinate,
         distance: i.distance,
+        timezone: i.data.timezone,
         id: i.data.id,
       });
+     // console.log("timezone:" ,i.data.timezone);
     });
 
     setData(arr);
@@ -251,10 +256,10 @@ const NearByLocation = (result: props) => {
 
                                   <OpenCloseStatus
                                     timezone={
-                                      result.timezone ? result.timezone : defaultTimeZone
+                                      e.timezone ? e.timezone : defaultTimeZone
                                     }
                                     hours={e.hours}
-                                    site={e.site}
+                                    site={result.site}
                                   ></OpenCloseStatus>
                                 </div>
                               </>

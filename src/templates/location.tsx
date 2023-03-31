@@ -104,20 +104,20 @@ export const config: TemplateConfig = {
       "c_metaTitle",
       "c_robotsTag",
 /*dm pages */
-      "dm_directoryParents.name",
-      "dm_directoryParents.slug",
-      "dm_directoryParents.meta.entityType",
-      "dm_directoryChildren.name",
-      //"dm_directoryChildren.entityId",
-      "dm_directoryChildren.address",
-      "dm_directoryChildren.slug",
-      "dm_directoryChildren.dm_directoryChildren.name",
-      "dm_directoryChildren.dm_directoryChildrenCount",
-      "dm_directoryChildren.dm_directoryChildren.slug",
-      "dm_directoryChildren.dm_directoryChildren.meta.entityType",
-      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.name",
-      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.slug",
-      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.id"
+      // "dm_directoryParents.name",
+      // "dm_directoryParents.slug",
+      // "dm_directoryParents.meta.entityType",
+      // "dm_directoryChildren.name",
+      // //"dm_directoryChildren.entityId",
+      // "dm_directoryChildren.address",
+      // "dm_directoryChildren.slug",
+      // "dm_directoryChildren.dm_directoryChildren.name",
+      // "dm_directoryChildren.dm_directoryChildrenCount",
+      // "dm_directoryChildren.dm_directoryChildren.slug",
+      // "dm_directoryChildren.dm_directoryChildren.meta.entityType",
+      // "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.name",
+      // "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.slug",
+      // "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.id"
     ],
 
     // Defines the scope of entities that qualify for this stream.
@@ -363,8 +363,8 @@ const Location: Template<ExternalApiRenderData> = ({
    
     geocodedCoordinate,
 
-    dm_directoryParents,
-    dm_directoryChildren
+    //dm_directoryParents,
+    //dm_directoryChildren
   } = document;
 
   let templateData = { document: document, __meta: __meta };
@@ -417,7 +417,7 @@ const Location: Template<ExternalApiRenderData> = ({
   //console.log(name,"name");
   const { t, i18n } = useTranslation();
   i18n.changeLanguage(document.meta.locale);
-  useUpdateTranslation(_site, document.meta.locale);
+  //useUpdateTranslation(_site, document.meta.locale);
 
   var currentUrl = ""
   const myArray = path.split("/");
@@ -485,11 +485,11 @@ const Location: Template<ExternalApiRenderData> = ({
           />
 
 
-          <BreadCrumbs
+          {/* <BreadCrumbs
             name={name}
             parents={dm_directoryParents}
             address={address}
-          ></BreadCrumbs>
+          ></BreadCrumbs> */}
       
           <LocationInformation
             prop={hours}

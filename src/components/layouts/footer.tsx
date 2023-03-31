@@ -27,7 +27,7 @@ const Footer = (props: any) => {
     phone,
     path,_site
   } = props;
-
+//console.log(_site);
   return (
     <>
       <div className="subfooter-sec">
@@ -114,16 +114,25 @@ const Footer = (props: any) => {
 
 {/* Cookie Consent Section is for "To keep a user logged in as they browse from page to page." */}
       <CookieConsent
-        buttonText={_site.c_cookieButton?.label}
+        buttonText={_site.c_cookieButton?.label?_site.c_cookieButton?.label:"Accept all Cookies"}
         buttonStyle={{
           marginLeft: "100px",
         }}>        
         <p>
-        {_site.c_cookieText}
+        {_site.c_cookieText?_site.c_cookieText:"Our site and our partners collect data and use cookies in accordance with our"}
+
+        {_site.c_cookiePolicy?.label && _site.c_cookiePolicy?.link ?
+        (
           <Link className="text-cookies-link p-2 font-bold" href={_site.c_cookiePolicy?.link}>
           {_site.c_cookiePolicy?.label}
           </Link>
-          {_site.c_cookieTextAfter}
+        ):
+        <Link className="text-cookies-link p-2 font-bold" href="https://www.byredo.com/eu_en/cookie-policy">
+          cookie policy
+          </Link>
+}
+
+          {_site.c_cookieTextAfter?_site.c_cookieTextAfter:"to enhance your experience, analyze traffic and for ad personalization and measurement. For more information on this and how to manage your cookies, please click cookie settings below."}
         </p>
       </CookieConsent>
     </>

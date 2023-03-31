@@ -17,12 +17,13 @@ const PhotoSlider = (props: any) => {
   const photo = photos?.map((element:any) => (     
    <div className="relative inline-block">
        <img className="max-h-[25.188rem] w-full" src={element?.image?.url} alt=""/>
-       { element?.clickthroughUrl &&
-       <a href={element?.clickthroughUrl}><span className="absolute bottom-0 left-0 right-0 text-center text-[18px] pb-4"> {element?.description}</span></a>
-}
-{ !element?.clickthroughUrl &&
+       { element?.clickthroughUrl && element?.description ?
+       (<a href={element?.clickthroughUrl}><span className="absolute bottom-0 left-0 right-0 text-center text-[18px] pb-4"> {element?.description}</span></a>
+       ):
+
+
        <span className="absolute bottom-0 left-0 right-0 text-center text-[18px] pb-4"> {element?.description}</span>
-}
+       }
    </div>
     
   ));
@@ -30,6 +31,7 @@ const PhotoSlider = (props: any) => {
   return (
     <>
     <div className="Categories mt-[60px]">
+
     <h2 className="text-[34px] text-center">{photoGalleryTitle}</h2>
     <div className="pt-[30px] grid grid-cols-1 sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-5">
 	  

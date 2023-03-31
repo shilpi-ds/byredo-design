@@ -21,7 +21,7 @@ function LocalesDropdown(props: any) {
   const onLanguageChange = (e: any) => 
   {
   setLanguage(e.target.value);
-  console.log(e.target.value,"hjh");
+  //console.log(e.target.value,"hjh");
   props.updatelocale(e.target.value);
   setSection(props.country[section].index);
  
@@ -59,12 +59,13 @@ function LocalesDropdown(props: any) {
       })
     const finalresult =Result && Result.filter((res:any)=>{
       if(res.hasOwnProperty('index')){
+        console.log(res,"ressssss");
        return res
       }
    })
-   console.log(finalresult[0].index);
+   //console.log(finalresult[0].index);
    setSection(finalresult[0].index);
-   console.log(props.country[finalresult[0].index].language[0].languageCode,"lang");
+   //console.log(props.country[finalresult[0].index].language[0].languageCode,"lang");
   },[])
 
   
