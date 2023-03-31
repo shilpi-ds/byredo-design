@@ -1,12 +1,12 @@
 import { useSearchActions } from "@yext/search-headless-react";
 import * as React from "react";
-import { useState } from 'react';
+import { useEffect, useState, useRef } from "react";
 import Geocode from "react-geocode";
 import { useTranslation } from "react-i18next";
 import { svgIcons } from "../../svg icons/svgIcon";
-import { AnswerExperienceConfig, googleMapsConfig, limit } from "..//../config/globalConfig";
+import {AnswerExperienceConfig,googleMapsConfig,limit,} from "..//../config/globalConfig";
 import FilterAwesome from "../locatorPage/Filter";
-import FilterSearch from "../locatorPage/FilterSearch";
+import $ from "jquery";
 
 const SearchFile = () => {
   const [centerLatitude, setCenterLatitude] = useState(
@@ -15,14 +15,20 @@ const SearchFile = () => {
   const [centerLongitude, setCenterLongitude] = useState(
     googleMapsConfig.centerLongitude
   );
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [errorstatus, setErrorStatus] = useState(false);
   const [check, setCheck] = useState(false);
   const [inputvalue, setInputValue] = React.useState("");
   const [allowlocation, setallowLocation] = React.useState("");
   // const[error,setError]=useState(false);
   const [userShareLocation, setUserShareLocation] = useState(false);
-  const [offset, setOffset] = React.useState(0);
   const searchActions = useSearchActions();
+  const [isUserLocation, setIsUserLocation] = React.useState(false);
+  const [showNotFound, setShowNotFound] = useState(false);
+  const [autocomplete, setAutocomplete] =
+    useState<google.maps.places.Autocomplete>();
+  let googleLib = typeof google !== "undefined" ? google : null;
 
   const onClick = () => {
     setInputValue("");
@@ -68,7 +74,6 @@ const SearchFile = () => {
             longitude: position.coords.longitude,
           });
           searchActions.setVertical(AnswerExperienceConfig.verticalKey);
-          // searchActions.setQuery(response.results[0].formatted_address);
           searchActions.setOffset(0);
           searchActions.setVerticalLimit(limit);
           searchActions.executeVerticalQuery();
@@ -81,40 +86,58 @@ const SearchFile = () => {
     }
   };
 
-  const Findinput = () => {
-    const searchKey: any = document.getElementsByClassName('FilterSearchInput');
-    const Search = (searchKey[0].value);
-    searchActions.setOffset(0);
+  // const Findinput = () => {
+  //   const searchKey: any = document.getElementsByClassName('FilterSearchInput');
+  //   const Search = (searchKey[0].value);
+  //   searchActions.setOffset(0);
 
-    if (searchKey[0].value != "") {
-      setInputValue("");
-      setErrorStatus(false);
+  //   if (searchKey[0].value != "") {
+  //     setInputValue("");
+  //     setErrorStatus(false);
+  //     getCoordinates(Search);
+  //   }
+  //   if (searchKey[0].value == "") {
+  //     setErrorStatus(true);
+  //   }
+  // };
+
+  const Findinput = () => {
+   const searchKey = document.getElementsByClassName("FilterSearchInput");
+    const Search = inputRef.current?.value || "";
+    setIsUserLocation(false);
+    setShowNotFound(false);
+    if (Search) {
       getCoordinates(Search);
     }
-    if (searchKey[0].value == "") {
-      setErrorStatus(true);
+    searchActions.setOffset(0);
+  };
+  const Findinput2 = () => {
+   const searchKey: any = document.getElementsByClassName("FilterSearchInput");
+   const Search = inputRef.current?.value || "";
+    setIsUserLocation(false);
+    if (Search.length == 0) {
+      setShowNotFound(false);
+      const bounds = new google.maps.LatLngBounds();
+      bounds.extend({
+        lat: googleMapsConfig.centerLatitude,
+        lng: googleMapsConfig.centerLongitude,
+      });
+      searchActions.setVertical("locations");
+      searchActions.setQuery("");
+      searchActions.setOffset(0);
+      searchActions.setVerticalLimit(limit);
+      searchActions.executeVerticalQuery();
+      // getCoordinates(Search);
     }
   };
-
-
-
-  const handleInputValue = () => {
-    setInputValue('');
-  }
-  const handleSetUserShareLocation = (value: any, userShareStatus: boolean) => {
-    setInputValue(value);
-    if (!userShareStatus) {
-      setCenterLatitude(googleMapsConfig.centerLatitude);
-      setCenterLongitude(googleMapsConfig.centerLongitude);
-    }
-  };
-
 
   function getCoordinates(address: string) {
+    setActiveIndex(null);
+    document.querySelectorAll(".scrollbar-container")[0].scrollTop = 0;
     fetch(
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-      address +
-      "&key=AIzaSyDZNQlSlEIkFAct5VzUtsP4dSbvOr2bE18"
+        address +
+        "&key=AIzaSyDZNQlSlEIkFAct5VzUtsP4dSbvOr2bE18"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -122,11 +145,22 @@ const SearchFile = () => {
           data.results.map((res: any) => {
             const userlatitude = res.geometry.location.lat;
             const userlongitude = res.geometry.location.lng;
-            const params = { latitude: userlatitude, longitude: userlongitude };
-            setCenterLatitude(userlatitude);
-            setCenterLongitude(userlongitude);
+           const params = { latitude: userlatitude, longitude: userlongitude };
             searchActions.setQuery(address);
+            searchActions.setUserLocation({
+              latitude: userlatitude,
+              longitude: userlongitude,
+            });
             searchActions.executeVerticalQuery();
+            const country = res.address_components.find(
+              (e: { types: string | string[] }) => e.types.includes("country")
+            );
+
+            if (country && country.short_name.toLowerCase() !== "gb") {
+              setShowNotFound(true);
+            } else {
+              setShowNotFound(false);
+            }
           });
         } else {
           searchActions.setUserLocation({
@@ -135,19 +169,117 @@ const SearchFile = () => {
           });
           searchActions.setQuery(address);
           searchActions.executeVerticalQuery();
+          if (inputRef.current?.value) {
+            setShowNotFound(true);
+          }
         }
       });
   }
 
 
-  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    if (googleLib && typeof google.maps === "object") {
+      const pacInput: any = document?.getElementById("pac-input");
+      console.log(pacInput,"pacInput")
+      const options: any = {
+        options: {
+          language: ["en_GB", "fr-FR", "it-IT", "ja-JP", "de-DE"],
+          //types: ["(regions)"],
+          fields: ["address_component", "geometry"],
+        },
+      };
+      const autoComplete = new google.maps.places.Autocomplete(
+        pacInput,
+        options
+      );
+      if (autoComplete) {
+        function pacSelectFirst(input: HTMLInputElement) {
+         const _addEventListener = input.addEventListener;
+
+          function addEventListenerWrapper(type: string, listener: any) {
+            if (type == "keydown") {
+             const orig_listener = listener;
+
+              listener = function (event: { which: number }) {
+               const suggestion_selected = $(".pac-item-selected").length > 0;
+
+                if (
+                  (event.which == 13 || event.which == 9) &&
+                  !suggestion_selected
+                ) {
+                 const simulated_downarrow = $.Event("keydown", {
+                    keyCode: 40,
+                    which: 40,
+                  });
+                  orig_listener.apply(input, [simulated_downarrow]);
+                }
+
+                orig_listener.apply(input, [event]);
+              };
+            }
+
+            _addEventListener.apply(input, [type, listener]);
+          }
+
+          if (input.addEventListener) {
+            input.addEventListener = addEventListenerWrapper;
+          }
+        }
+
+        setAutocomplete(autoComplete);
+        pacSelectFirst(pacInput);
+        $("#search-location-button")
+          .off("click")
+          .on("click", function () {
+            const keydown = document.createEvent("HTMLEvents");
+            keydown.initEvent("keydown", true, false);
+            Object.defineProperty(keydown, "keyCode", {
+              get: function () {
+                return 13;
+              },
+            });
+            Object.defineProperty(keydown, "which", {
+              get: function () {
+                return 13;
+              },
+            });
+            pacInput.dispatchEvent(keydown);
+          });
+
+        google.maps.event.addListener(
+          autoComplete,
+          "place_changed",
+          function () {
+            const searchKey: any = pacInput.value;
+            const place = autoComplete.getPlace();
+            console.log("searchKey", searchKey, place);
+            if (!place.address_components) {
+              setShowNotFound(true);
+            } else {
+              setShowNotFound(false);
+            }
+            if (searchKey) {
+              getCoordinates(searchKey);
+            }
+          }
+        );
+      }
+    }
+    return () => {
+      if (autocomplete) {
+        autocomplete.unbindAll();
+      }
+    };
+  }, [googleLib]);
+
+
+  
+  const { t } = useTranslation();
   return (
     <>
       <div className="search-block">
-        {allowlocation.length > 0 ? (
+        {allowlocation.length > 0 && (
           <div className="for-allow">{t("Please allow your Location")}</div>
-        ) : (
-          ""
         )}
 
         <div className="location-with-filter">
@@ -167,64 +299,53 @@ const SearchFile = () => {
 
         {/* Search Input by name,address  */}
         <div className="search-form">
-          <FilterSearch
-            customCssClasses={{
-
-              // filterSearchContainer: "mb-0",
-              inputElement: "FilterSearchInput",
-              optionsContainer: "options",
+          <input
+            id="pac-input"
+            type="text"
+            ref={inputRef}
+            value={inputvalue}
+            placeholder={t("Enter address, city, postalcode")}
+            className="FilterSearchInput"
+            onChange={(e) =>
+             { Findinput2();
+               setInputValue(e.target.value)
+              }}
+            onKeyDown={(evt) => {
+              if (evt.key === "Enter") {
+                Findinput();
+              }
+              if (
+                evt.key === "Backspace" ||
+                evt.key === "x" ||
+                evt.key === "Delete"
+              ) {
+                Findinput2();
+               
+              }
             }}
-            inputvalue={inputvalue}
-            errorstatus={errorstatus}
-            setErrorStatus={setErrorStatus}
-            searchOnSelect={false}
-            searchFields={[
-              {
-                entityType: "location",
-                fieldApiName: "name",
-              },
-              {
-                entityType: "location",
-                fieldApiName: "address.line1",
-              },
-              {
-                entityType: "location",
-                fieldApiName: "address.line2",
-              },
-              {
-                entityType: "location",
-                fieldApiName: "address.city",
-              },
-              {
-                entityType: "location",
-                fieldApiName: "address.postalCode",
-              },
-            ]}
-            handleInputValue={handleInputValue}
-            handleSetUserShareLocation={handleSetUserShareLocation}
           />
           <div className="flex justify-between">
             {/* Filter */}
             <FilterAwesome
               customCssClasses={{ container: "filter-items" }}
               defaultExpanded={true}
-            ></FilterAwesome></div>
+            ></FilterAwesome>
+          </div>
 
           {/* Search icon Button  */}
           <button
             className="button"
             aria-label="Search bar icon"
             id="search-location-button"
-            onClick={Findinput}
+            onClick={() => {
+              Findinput();
+            }}
           >
             {svgIcons.Searchbaricon}
           </button>
-
         </div>
       </div>
-
-
     </>
-  )
-}
+  );
+};
 export default SearchFile;

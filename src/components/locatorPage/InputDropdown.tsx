@@ -77,7 +77,6 @@ export default function InputDropdown({
   onDropdownLeave,
   cssClasses = {},
   handleInputValue,
-  params,
   errorstatus,
  setErrorStatus
 }: React.PropsWithChildren<Props>): JSX.Element | null {
@@ -108,7 +107,7 @@ export default function InputDropdown({
     const currentSectionIndex = numSections;
     numSections++;
 
-    let childProps = child.props as DropdownSectionProps;
+    const childProps = child.props as DropdownSectionProps;
     const modifiedOptions = childProps.options.map(option => {
       const modifiedOnSelect = () => {
         setLatestUserInput(option.value);
@@ -194,8 +193,8 @@ export default function InputDropdown({
     // }
     if (["ArrowDown", "ArrowUp"].includes(evt.key)) {
       evt.preventDefault();
-      let searchKey: any = document.getElementsByClassName("FilterSearchInput");
-      let Search: any = searchKey[0].value;
+      const searchKey: any = document.getElementsByClassName("FilterSearchInput");
+      const Search: any = searchKey[0].value;
       console.log(Search,"SEarch")
     }
     if (
@@ -203,8 +202,8 @@ export default function InputDropdown({
       latestUserInput != ""
     ) {
       dispatch({ type: 'HideSections' });  
-        let searchKey: any = document.getElementsByClassName("FilterSearchInput");
-        let Search: any = searchKey[0].value;
+        const searchKey: any = document.getElementsByClassName("FilterSearchInput");
+        const Search: any = searchKey[0].value;
         setErrorStatus(false);
         setLatestUserInput(Search)
         getCoordinates(latestUserInput);
@@ -261,8 +260,7 @@ export default function InputDropdown({
        if(data.status == "OK"){
             data.results.map((res:any)=>{
               const userlatitude = res.geometry.location.lat;
-              const userlongitude = res.geometry.location.lng;
-              let params={latitude:userlatitude,longitude:userlongitude};              
+              const userlongitude = res.geometry.location.lng;          
               setCenterLatitude(userlatitude);
               setCenterLongitude(userlongitude);
               // searchActions.setUserLocation(params);
@@ -356,4 +354,4 @@ export default function InputDropdown({
       }
     </div>
   );
-};
+}

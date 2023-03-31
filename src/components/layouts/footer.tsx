@@ -1,19 +1,12 @@
 import * as React from "react";
-import CookieConsent, { Cookies } from "react-cookie-consent";
+import CookieConsent from "react-cookie-consent";
 import LocalesDropdown from "../../components/commons/LanguageDropdown";
 import { Link } from "@yext/pages/components";
 import { svgIcons } from "../../svg icons/svgIcon";
-type props = {
-  footerHelpSection: any;
-  servicesFooter: any;
-  footerStoreLocator: any;
-  customerCare: any;
-  emailAddress: any;
-  path:any;
-};
+import Accordian from "./Accordian";
 
 /**
- * @param props 
+ * @param props
  * @returns HTML elements of Footer Component
  */
 
@@ -25,17 +18,24 @@ const Footer = (props: any) => {
     footerStoreLocator,
     customerCare,
     phone,
-    path,_site
+    path,
+    _site,
   } = props;
-//console.log(_site);
+
   return (
     <>
       <div className="subfooter-sec">
         <div className="container-lg">
           <div className="subfooter-inner">
-            <div className="subfooter-links">  
+            <div className="subfooter-links">
               <ul>
-              <li><LocalesDropdown updatelocale={path} country={_site.c_countryFooter} site={_site}/></li>
+                <li>
+                  <LocalesDropdown
+                    updatelocale={path}
+                    country={_site.c_countryFooter}
+                    site={_site}
+                  />
+                </li>
                 <li className="text-xl pb-4">{customerCare}</li>
                 <li className="location-phone ">
                   <Link
@@ -48,7 +48,7 @@ const Footer = (props: any) => {
                   </Link>
                 </li>
                 {emailAddress?.link && emailAddress?.label && (
-                  <li className="location-phone ">               
+                  <li className="location-phone ">
                     <Link
                       className="link-line-text relative"
                       href={`mailto:${emailAddress.link}`}
@@ -58,7 +58,7 @@ const Footer = (props: any) => {
                   </li>
                 )}
               </ul>
-              <ul>
+              {/* <ul>
                 <li className="text-xl pb-4">{footerHelpSection?.helpTitle}</li>
                 {footerHelpSection?.helpLinks.map((e: any) => {
                   return (
@@ -69,9 +69,12 @@ const Footer = (props: any) => {
                     </li>
                   );
                 })}
-              </ul>
-
-              <ul>
+              </ul> */}
+              <Accordian
+                title={footerHelpSection?.helpTitle}
+                links={footerHelpSection?.helpLinks}
+              />
+              {/* <ul>
                 <li className="text-xl pb-4">
                   {servicesFooter?.servicesTitle}
                 </li>
@@ -83,9 +86,16 @@ const Footer = (props: any) => {
                     </li>
                   );
                 })}
-              </ul>
-
-              <ul>
+              </ul> */}
+              <Accordian
+                title={servicesFooter?.servicesTitle}
+                labels={servicesFooter?.servicesList}
+              />
+              <Accordian
+                title={footerStoreLocator?.helpTitle}
+                links={footerStoreLocator.helpLinks}
+              />
+              {/* <ul>
                 <li className="text-xl pb-4">
                   {footerStoreLocator?.helpTitle}
                 </li>
@@ -98,23 +108,30 @@ const Footer = (props: any) => {
                     </li>
                   );
                 })}
-              </ul>
+              </ul> */}
             </div>
           </div>
           <div className="float-left pt-2">© Byredo</div>
-          <Link href="https://www.instagram.com/officialbyredo/" target="_blank" rel="noopener noreferrer">
+          <Link
+            href="https://www.instagram.com/officialbyredo/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div className="float-right">{svgIcons.instagram}</div>
-            </Link>
-            <Link href="https://www.facebook.com/byredo/" target="_blank" rel="noopener noreferrer">
+          </Link>
+          <Link
+            href="https://www.facebook.com/byredo/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div className="float-right pr-4">{svgIcons.facebook}</div>
           </Link>
         </div>
       </div>
 
-
-{/* Cookie Consent Section is for "To keep a user logged in as they browse from page to page." */}
-      <CookieConsent
-        buttonText={_site.c_cookieButton?.label?_site.c_cookieButton?.label:"Accept all Cookies"}
+  {/* Cookie Consent Section is for "To keep a user logged in as they browse from page to page." */}
+  <CookieConsent
+        buttonText={_site.c_cookieButton?.label?_site.c_cookieButton?.label: "Accept all Cookies"}
         buttonStyle={{
           marginLeft: "100px",
         }}>        

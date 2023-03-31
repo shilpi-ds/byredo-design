@@ -9,7 +9,7 @@ import Address from "../commons/Address";
 import Phone from "../commons/phone";
 import { useEffect, useRef, useState } from "react";
 import Modal from "react-modal";
-import { slugify1, defaultTimeZone } from "../../config/globalConfig";
+import { defaultTimeZone } from "../../config/globalConfig";
 import Hours from "../commons/hours";
 import { useTranslation } from "react-i18next";
 
@@ -74,17 +74,17 @@ const LocationInformation = (data: props) => {
   const [currentLocationLatLng, setCurrentLocationLatLng] =
     React.useState(null);
   const [isShow, setIsShow] = React.useState(false);
-  var array: any = [];
+  const array: any = [];
   React.useEffect(() => {
     const date = new Date();
-    let Day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    let currentDate = `${year}-${month}-${Day}`;
+    const Day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const currentDate = `${year}-${month}-${Day}`;
     data?.prop?.holidayHours &&
       data?.prop?.holidayHours.map((i: any) => {
-        let d1 = new Date(`${currentDate}`);
-        let d2 = new Date(`${i.date}`);
+        const d1 = new Date(`${currentDate}`);
+        const d2 = new Date(`${i.date}`);
         if (d2.getTime() >= d1.getTime()) {
           array.push(i);
         }

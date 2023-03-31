@@ -81,7 +81,7 @@ export default function Facet(props: FacetProps): JSX.Element {
             onChange={e => setFilterValue(e.target.value)}/>}
         <div className={cssClasses.optionsContainer}>
           {facetOptions.map((option:any) =>
-           {var a:any = option.displayName?.length > 2 ? 
+           {const a:any = option.displayName?.length > 2 ? 
            `${option.displayName}`
            :
            `${regionNames.of(option.displayName)}` 

@@ -1,10 +1,9 @@
-const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 /**
  * This is an GetDirection Component which returns the Store address in Google map.
  * @param entitiy 
  */
 export default function getDirectionUrl(entitiy: any) {
-  var address_string = "";
+  let address_string = "";
   address_string =
     `${entitiy.address?.line1},` +
     `${entitiy.address?.line2},` +
@@ -13,7 +12,7 @@ export default function getDirectionUrl(entitiy: any) {
     `${entitiy.address?.postalCode},` +
     `${entitiy.address?.countryCode}`;
   address_string = address_string.replace("undefined,", "");
-  var origin: any = null;
+  let origin: any = null;
   if (entitiy.address?.city) {
     origin = entitiy.address?.city;
   } else if (entitiy.address?.region) {
@@ -22,11 +21,11 @@ export default function getDirectionUrl(entitiy: any) {
     origin = entitiy.address?.country;
   }
   if (navigator.geolocation) {
-    const error = (error: any) => {
-      var message_string =
+    const error = () => {
+      const message_string =
         "Unable to determine your location. please share your location";
       if (confirm(message_string) != true) {
-        var getDirectionUrl =
+        const getDirectionUrl =
           "https://www.google.com/maps/dir/?api=1&destination=" +
           address_string +
           "&origin=" +
@@ -39,9 +38,9 @@ export default function getDirectionUrl(entitiy: any) {
     };
     navigator.geolocation.getCurrentPosition(
       function (position) {
-        let currentLatitude = position.coords.latitude;
-        let currentLongitude = position.coords.longitude;
-        let getDirectionUrl =
+        const currentLatitude = position.coords.latitude;
+        const currentLongitude = position.coords.longitude;
+        const getDirectionUrl =
           "https://www.google.com/maps/dir/?api=1&destination=" +
           address_string +
           "&origin=" +

@@ -6,7 +6,7 @@ const containerStyle = {
   height: "100%",
 };
 
-var center = {
+let center = {
   lat: 0.0,
   lng: 0.0,
 };

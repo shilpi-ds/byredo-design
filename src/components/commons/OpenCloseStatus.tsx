@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-let site = "";
 const openClose = {
   formatOpenNowString: (hoursData: any, timeZone: any, t: any) => {
     let Day = 0;
@@ -302,16 +301,14 @@ const openClose = {
 };
 
 export default function OpenCloseStatus(props: {timezone: any;
-  
   hours: { reopenDate: any };
-  site: any;}) {
-    //console.log(props,"loc");
+  site?: any;}) {
 const { t } = useTranslation();
   return (
     <div className="">
       {props?.hours && props?.hours?.reopenDate ? (
         <p className="">{props?.site?.c_temporarilyClosed ? props?.site?.c_temporarilyClosed: t("Temporarily Closed")}</p>
-      ) : props?.hours &&  props?.site ? (
+      ) : props?.hours && props?.site ? (
         <p className="closeing-div onhighLight">
           {openClose.formatOpenNowString(props.hours, props.timezone, t)}
         </p>

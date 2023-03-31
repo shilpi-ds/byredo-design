@@ -1,25 +1,12 @@
 import * as React from "react";
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
-import {
-  FilterSearch,
-  VerticalResults,
-  ResultsCount,
-  Pagination,
-  LocationBias,
-  NumericalFacets,
-  NumericalFacetsProps,
-  StandardFacets,
-  StandardFacetsProps,
-} from "@yext/search-ui-react";
 import { svgIcons } from "../../svg icons/svgIcon";
 import Facets from "./Facets";
 import { useSearchState } from "@yext/search-headless-react";
-import { Link } from "@yext/pages/components";
 
-const FilterAwesome = (props: any) => {
+const FilterAwesome = () => {
   const facets = useSearchState((state) => state.filters?.facets) || [];
-  let subtitle: any;
   const [modalIsOpen, setIsOpen] = useState(false);
   const [filterbutton, setfilterbutton] = useState(false);
   useEffect(() => {
@@ -49,10 +36,6 @@ const FilterAwesome = (props: any) => {
         setIsOpen(true);
       }
     });
-  }
-
-  function afterOpenModal() {
-    subtitle.style.color = "#f00";
   }
 
   function closeModal() {

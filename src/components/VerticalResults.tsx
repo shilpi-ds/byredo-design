@@ -63,7 +63,6 @@ interface VerticalResultsProps {
   displayAllOnNoResults?: boolean,
   customCssClasses?: VerticalResultsCssClasses,
   cssCompositionMethod?: CompositionMethod,
-  allowPagination?: boolean,
   locationResults:[],
   _site:any;
   activeIndex: number | null;
@@ -71,7 +70,7 @@ interface VerticalResultsProps {
 
 export default function VerticalResults(props: VerticalResultsProps): JSX.Element | null {
 
-  const { displayAllOnNoResults = false, allowPagination = true, ...otherProps } = props;
+  const { displayAllOnNoResults = false,...otherProps } = props;
   const verticalResults = props.locationResults || [];
   const allResultsForVertical = useSearchState(state => state.vertical?.noResults?.allResultsForVertical.results) || [];
   const verticalResultsCount = useSearchState(state => state.vertical.resultsCount) || 0;

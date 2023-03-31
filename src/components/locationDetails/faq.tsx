@@ -14,15 +14,15 @@ const Faq = (faqData: Faq) => {
   const [readmore, setReadmore] = useState(false);
   const isShowContent = (e: any, index: any) => {
     setselected(index);
-    let parent = e.target.parentNode;
-    let parent2 = e.target.parentNode.parentNode;
+    const parent = e.target.parentNode;
+    const parent2 = e.target.parentNode.parentNode;
     if (
       parent.classList.contains("opened") ||
       parent2.classList.contains("opened")
     ) {
       setFaqClass("");
     } else {
-      var acc = document.getElementsByClassName("faq-block");
+      const acc = document.getElementsByClassName("faq-block");
       for (let s = 0; s < -1; s++) {
         acc[s].classList.remove("opened");
       }
@@ -32,7 +32,7 @@ const Faq = (faqData: Faq) => {
   useEffect(() => {
     setFaq_Data(faqData.prop);
   });
-  var length: number = 4;
+  let length = 4;
   if (readmore) {
     length = faq_Data.length;
   } else {

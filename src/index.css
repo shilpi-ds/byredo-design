@@ -664,9 +664,13 @@ button.gm-ui-hover-effect span {
 .subfooter-links {
   @apply  w-full flex flex-wrap;
 }
-.subfooter-links ul {
+.subfooter-links ul, .subfooter-links .footer-link-column {
   @apply w-full md:w-1/4 mb-5 md:mb-0;
 }
+.subfooter-links .footer-link-column ul {
+  @apply w-full;
+}
+
 .subfooter-links ul li {
   @apply leading-5 pr-2 mb-4;
 }
@@ -1391,6 +1395,7 @@ nhs_pre
   box-shadow: 0 0 20px #0f425c;
 }
 
+
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
@@ -1407,9 +1412,9 @@ nhs_pre
     transform: rotate(405deg);
   }
 }
-/* 4/3/2023 */
+/* CSS Added 30-03-23*/
 .search-form input {
-  @apply placeholder:text-text-color font-normal;
+  @apply placeholder:text-text-color font-normal w-full focus:outline-none focus:shadow-none;
 }
 .well-card-inner p {
   @apply text-sm md:text-lg;
@@ -1451,4 +1456,25 @@ nhs_pre
 
 .dropdown{
   @apply bg-black text-white
+}
+
+@media screen and (max-width: 767px) {
+  .hide-in-mobile {
+    height: 0px;
+    overflow: hidden;
+    -webkit-transition: height 1s linear;
+       -moz-transition: height 1s linear;
+        -ms-transition: height 1s linear;
+         -o-transition: height 1s linear;
+            transition: height 1s linear;
+  }
+  
+  .hide-in-mobile.open {
+     height: auto;
+     -webkit-transition: height 1s linear;
+        -moz-transition: height 1s linear;
+         -ms-transition: height 1s linear;
+          -o-transition: height 1s linear;
+             transition: height 1s linear;
+  }
 }

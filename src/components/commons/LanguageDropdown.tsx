@@ -1,117 +1,90 @@
 import * as React from "react";
-import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-//import "../../types/i18n.tsx";
-//import $ from "jquery";
 function LocalesDropdown(props: any) {
-  //console.log(props,"ggggggggggggg");
-  const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState("");
   const [section, setSection] = useState(0);
-  const [locale, setLocale] =useState("");
-  //let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
-  
+  const [locale, setLocale] = useState("");
+
   /**
-   * For Language dropdown
+   * For language dropdown
    * @param e 
-   * 
+   */
+  const onLanguageChange = (e: any) => {
+    setLanguage(e.target.value);
+    props.updatelocale(e.target.value);
+  };
+
+  /**
+   * For country dropdown
+   * @param e
    */
 
-  const onLanguageChange = (e: any) => 
-  {
-  setLanguage(e.target.value);
-  //console.log(e.target.value,"hjh");
-  props.updatelocale(e.target.value);
-  setSection(props.country[section].index);
- 
-  };
- 
-
-
-/**
- * For country dropdown
- * @param e 
- */
-
-  const handleClick = (e:any) => {
+  const handleClick = (e: any) => {
     setSection(e.target.value);
     setLanguage(props.country[e.target.value].language[0].languageCode);
-    console.log(props.country[e.target.value].language[0].languageCode,"locale");
-   props.updatelocale(props.country[e.target.value].language[0].languageCode);
-  //setLanguage();
-   setLocale(e.target[e.target.value].text);
- //console.log(locale);
-
-    
+    props.updatelocale(props.country[e.target.value].language[0].languageCode);
+    setLocale(e.target[e.target.value].text);
   };
-  useEffect(()=>{
-    
-    // console.log(props.country)
-   const Result = props.country?.filter((res:any,index:number)=>{
-         return  res.language && res.language.map((inr:any)=>{
-           if(inr.languageCode === props.site.meta.locale){
-            console.log(inr.languageCode,"hhhh");
+  useEffect(() => {
+    const Result = props.country?.filter((res: any, index: number) => {
+      return (
+        res.language &&
+        res.language.map((inr: any) => {
+          if (inr.languageCode === props.site.meta.locale) {
             setLanguage(inr.languageCode);
-           return  res.index = index;
-           }
+            return (res.index = index);
+          }
         })
-      })
-    const finalresult =Result && Result.filter((res:any)=>{
-      if(res.hasOwnProperty('index')){
-        console.log(res,"ressssss");
-       return res
-      }
-   })
-   //console.log(finalresult[0].index);
-   setSection(finalresult[0].index);
-   //console.log(props.country[finalresult[0].index].language[0].languageCode,"lang");
-  },[])
+      );
+    });
+    const finalresult =
+      Result &&
+      Result.filter((res: any) => {
+        if (res.hasOwnProperty("index")) {
+          return res;
+        }
+      });
+    setSection(finalresult[0].index);
+  }, []);
 
-  
-  
-  /**
-   * Return content for country & language dropdown
-   */
- 
+/**
+ * Return results for country & language dropdown
+ */
   return (
     <div>
       <form>
-      
-        <select onChange={(e) =>handleClick(e)} value={section}>
-        {props.country?.map((e: any,ind:any) => {
-         
-                  return (
-                    
-                       <option  value={ind} selected={ind === section}>{e.country}</option>
-                    
-                  );
-                })}
-
+        <select onChange={(e) => handleClick(e)}>
+          {props.country?.map((e: any, ind: any) => {
+            return (
+              <option value={ind}>
+                {e.country}
+              </option>
+            );
+          })}
         </select>
-        <select onChange={(e)=>onLanguageChange(e)} value={language} className="language" defaultValue={language}>
-       
-             
-                    {props.country[section].language?.map((el: any,indd:number) => {
-                        
-                         //const selected=(props.site.meta.locale === el.languageCode) ? true : false;
-                       //console.log(props.site.meta.locale,language,"m");
-                              return (
-                              
-                                   <option value={el.languageCode} key={indd} selected={props.site.meta.locale === language}>{el.language}</option>
-                                
-                              );
-                            })}
-                           
-                           
-                  
-            
-          </select>
+        <select
+          onChange={(e) => onLanguageChange(e)}
+          value={language}
+          className="language"
+          defaultValue={language}
+        >
+          {props.country[section].language?.map((el: any, indd: number) => {
+            const selected = props.site.meta.locale === el.languageCode ? true : false;
+            return (
+              <option
+                value={el.languageCode}
+                key={indd}
+                
+              >
+                {el.language}
+              </option>
+            );
+          })}
+        </select>
       </form>
     </div>
   );
 }
 
 export default withTranslation()(LocalesDropdown);
-
-

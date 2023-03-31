@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useSearchState } from "@yext/search-headless-react";
 
 let mapLocations:any = [];
@@ -51,7 +50,7 @@ const useFetchResults = () => {
   }
 
     
-  let mapLocationsResults = mapLocations;  
+  const mapLocationsResults = mapLocations;  
 
   return mapLocationsResults;
 };

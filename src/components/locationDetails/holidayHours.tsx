@@ -15,22 +15,22 @@ type OpenIntervals = {
 };
 const Holidayhour = (props: any) => {
   const date = new Date();
-  let Day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
+  const Day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
 
-  let currentDate = `${year}-${month}-${Day}`;
-  let array: any = [];
+  const currentDate = `${year}-${month}-${Day}`;
+  const array: any = [];
   props.hours.map((i: any) => {
-    let d1 = new Date(`${currentDate}`);
-    let d2 = new Date(`${i.date}`);
+    const d1 = new Date(`${currentDate}`);
+    const d2 = new Date(`${i.date}`);
     if (d2.getTime() >= d1.getTime()) {
       array.push(i);
     }
   });
   return (
     <>
-      {array.map((res: any, index: Number) => {
+      {array.map((res: any, index: number) => {
         const weeks = [
           "Sunday",
           "Monday",
@@ -41,7 +41,7 @@ const Holidayhour = (props: any) => {
           "Saturday",
         ];
         const d = new Date(res.date);
-        let day = d.getDay();
+        const day = d.getDay();
         let date: any = d.getDate();
         if (date < 10) {
           date = "0" + date;
@@ -50,7 +50,7 @@ const Holidayhour = (props: any) => {
         if (month < 10) {
           month = "0" + month;
         }
-        let year = d.getFullYear();
+        const year = d.getFullYear();
 
         return (
           <>
@@ -60,7 +60,7 @@ const Holidayhour = (props: any) => {
               {!res.isClosed && (
                 <div className="">
                   {res.openIntervals?.map(
-                    (openinterval: any, index: Number) => {
+                    (openinterval: any, index: number) => {
                       return (
                         <>
                           <div>

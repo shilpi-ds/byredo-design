@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 type Hours = {
   title?: string;
@@ -105,30 +105,30 @@ function sortByDay(week: Week): Week {
 const renderHours = (week: Week,site:any) => {
  
   const dayDom: JSX.Element[] = [];
-  var i = 0;
+  let i = 0;
   for (const [k, v] of Object?.entries(sortByDay(week))) {
     let a;
     let s;
-    var dayDate = new Date();
+    let dayDate = new Date();
 
     function join(t: any, a: any, s: any) {
       function format(m: any) {
-        let f = new Intl.DateTimeFormat("en", m);
+        const f = new Intl.DateTimeFormat("en", m);
         return f.format(t);
       }
       return a.map(format).join(s);
     }
-    function formatDate(date: any) {
-      var d = new Date(date),
-        month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate(),
-        year = d.getFullYear();
+    // function formatDate(date: any) {
+    //   let d = new Date(date),
+    //     month = "" + (d.getMonth() + 1),
+    //     day = "" + d.getDate(),
+    //     year = d.getFullYear();
 
-      if (month.length < 2) month = "0" + month;
-      if (day.length < 2) day = "0" + day;
+    //   if (month.length < 2) month = "0" + month;
+    //   if (day.length < 2) day = "0" + day;
 
-      return [year, month, day].join("-");
-    }
+    //   return [year, month, day].join("-");
+    // }
     if (i > 0) {
       dayDate = new Date(Date.now() + i * 24 * 60 * 60 * 1000);
     }
@@ -162,13 +162,13 @@ function isDayToday(dayName: string) {
  * @param includeMeridiem
  * @returns 12 hour format timing with AM PM
  */
-function convertTo12HourFormat(time: string, includeMeridiem: boolean): string {
-  const timeParts = time.split(":");
-  let hour = Number(timeParts[0]);
-  const minutesString = timeParts[1];
-  hour = hour % 24 || 24; // Adjust hours
-  return hour.toString() + ":" + minutesString;
-}
+// function convertTo12HourFormat(time: string, includeMeridiem: boolean): string {
+//   const timeParts = time.split(":");
+//   let hour = Number(timeParts[0]);
+//   const minutesString = timeParts[1];
+//   hour = hour % 24 || 24; // Adjust hours
+//   return hour.toString() + ":" + minutesString;
+// }
 
 type DayRow = {
   dayName: string;
@@ -188,11 +188,11 @@ type DayRow = {
 
 const DayRow = (props: DayRow) => {
   const { dayName, day, isToday, dayDate, holidayhours } = props;
-  const [myDataAccordintToMe, setMyDataAccordintToMe] = React.useState({});
+  const [myDataAccordintToMe, setMyDataAccordintToMe] = React.useState<any>({});
   let a, s, holidayDate: any;
   function join(t: any, a: any, s: any) {
     function format(m: any) {
-      let f = new Intl.DateTimeFormat("en", m);
+      const f = new Intl.DateTimeFormat("en", m);
       return f.format(t);
     }
     return a.map(format).join(s);
@@ -200,7 +200,7 @@ const DayRow = (props: DayRow) => {
   const holidayarray: any[] = [];
   const holidayopenintervals: any[] = [];
   const keysFromData = holidayhours
-    ? holidayhours.map((holiday: any, index: Number) => {
+    ? holidayhours.map((holiday: any) => {
         a = [{ day: "numeric" }, { month: "long" }, { year: "numeric" }];
         s = join(new Date(holiday.date), a, " ");
         holidayDate = s;
@@ -210,21 +210,21 @@ const DayRow = (props: DayRow) => {
     : null;
   React.useEffect(() => {
     if (keysFromData) {
-      var keysFromDataUnique = keysFromData.filter(
+      const keysFromDataUnique = keysFromData.filter(
         (value: any, index: any, self: any) => {
           return self.indexOf(value) === index;
         }
       );
-      var dataAccordintToMe = {};
+      const dataAccordintToMe: any = {};
       for (let index = 0; index < keysFromDataUnique.length; index++) {
         const element = keysFromDataUnique[index];
         dataAccordintToMe[element] = holidayarray.filter((fe: any) => {
-          let adate = [
+          const adate = [
             { day: "numeric" },
             { month: "long" },
             { year: "numeric" },
           ];
-          let matchdate = join(new Date(fe.date), adate, " ");
+          const matchdate = join(new Date(fe.date), adate, " ");
           return matchdate == element;
         });
       }
@@ -233,7 +233,7 @@ const DayRow = (props: DayRow) => {
   }, []);
 
   let Status = false;
-  for (var key in myDataAccordintToMe) {
+  for (const key in myDataAccordintToMe) {
     if (key.includes(dayDate)) {
       Status = true;
       holidayopenintervals.push(myDataAccordintToMe[key]);
@@ -290,7 +290,7 @@ const DayRow = (props: DayRow) => {
                   );
                 });
               })
-            : day?.openIntervals?.map((res: any, index: Number) => {
+            : day?.openIntervals?.map((res: any, index: number) => {
                 return (
                   <span className="time-hours">
                     <span className="time-open-hours">{res?.start}</span>
@@ -321,7 +321,6 @@ const DayRow = (props: DayRow) => {
    </span>
  </td> :
        <td className="pr-1">
-          {/* <span className="time-hours">{props?.site?.c_closed}</span> */}
           <span className="time-hours">{props?.site?.c_closed ? props?.site?.c_closed : `${t("Closed")}`}</span>
         </td>
       )}
@@ -343,8 +342,8 @@ const Hours = (props: Hours) => {
     if (date < 10) {
       date = "0" + date;
     }
-    var month = d.toLocaleString('default', { month: 'long' });
-    let year = d.getFullYear();
+   const month = d.toLocaleString('default', { month: 'long' });
+    const year = d.getFullYear();
    
     return () => {
         clearInterval(id);
@@ -354,7 +353,7 @@ const Hours = (props: Hours) => {
   const titleString = title && (
     <div className="text-xl font-semibold mb-4">{title}</div>
   );
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div>
       {titleString}

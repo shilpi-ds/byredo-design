@@ -8,8 +8,8 @@ type data = {
 };
 const BreadCrumbs = (props: data) => {
   const [list, setList] = React.useState(null);
-  var breadcrumbs;
-  var data: any = [];
+  let breadcrumbs;
+  const data: any = [];
   React.useEffect(() => {
     setURL(props.parents);
   }, [setList]);
@@ -24,7 +24,7 @@ const BreadCrumbs = (props: data) => {
             childrenCount: parents[i].dm_directoryChildrenCount,
           });
         } else if (parents[i]?.meta?.entityType?.id == "ce_region") {
-          let regionSlugPrifix = [];
+          const regionSlugPrifix = [];
           for (let r = 0; r < parents.length; r++) {
             if (
               parents[r].meta.entityType.id != "ce_root" &&
@@ -54,7 +54,7 @@ const BreadCrumbs = (props: data) => {
             childrenCount: parents[i].dm_directoryChildrenCount,
           });
         } else if (parents[i]?.meta?.entityType.id == "ce_city") {
-          let citySlugPrifix = [];
+          const citySlugPrifix = [];
           for (let c = 0; c < parents.length; c++) {
             if (
               parents[c]?.meta?.entityType.id != "ce_city" &&
@@ -107,7 +107,7 @@ const BreadCrumbs = (props: data) => {
     <div className="breadcrumb">
       <div className="container">
         <ul>
-          <li className="home">
+          <li className="home-li">
             <Link href="/index.html">Home</Link>
           </li>
           {list && (

@@ -12,7 +12,6 @@ var style = {
  * @returns 
  */
 const PhotoSlider = (props: any) => {
-  //console.log(props,"photo");
   const { photos, height, width,photoGalleryTitle} = props;  
   const photo = photos?.map((element:any) => (     
    <div className="relative inline-block">
@@ -31,7 +30,6 @@ const PhotoSlider = (props: any) => {
   return (
     <>
     <div className="Categories mt-[60px]">
-
     <h2 className="text-[34px] text-center">{photoGalleryTitle}</h2>
     <div className="pt-[30px] grid grid-cols-1 sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-5">
 	  

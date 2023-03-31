@@ -1,5 +1,5 @@
 import { useRef, useState,useEffect } from "react";
-import { useSearchState, useSearchActions, FilterSearchResponse, SearchParameterField, Filter } from "@yext/search-headless-react";
+import { useSearchActions, FilterSearchResponse, SearchParameterField, Filter } from "@yext/search-headless-react";
 import InputDropdown, { InputDropdownCssClasses } from "./InputDropdown";
 import DropdownSection, { DropdownSectionCssClasses, Option } from "./DropdownSection";
 import { processTranslation } from "./utils/processTranslation";
@@ -7,12 +7,9 @@ import { useSynchronizedRequest } from "../../hooks/useSynchronizedRequest";
 import renderAutocompleteResult, { AutocompleteResultCssClasses } from "./utils/renderAutocompleteResult";
 import {  useComposedCssClasses } from "../../hooks/useComposedCssClasses";
 import { CompositionMethod } from "../../hooks/CompositionMethod";
-import { AnswerExperienceConfig, googleMapsApiKey, limit } from "..//../config/globalConfig";
+import { limit } from "..//../config/globalConfig";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import errorbox from "../../images/error-status-icon.png"
-
-const SCREENREADER_INSTRUCTIONS = '';
 
 interface FilterSearchCssClasses extends InputDropdownCssClasses, DropdownSectionCssClasses, AutocompleteResultCssClasses {
   container?: string,
@@ -46,7 +43,6 @@ export interface FilterSearchProps {
 }
 
 export default function FilterSearch ({
-  label,
   sectioned,
   searchFields,
   customCssClasses,

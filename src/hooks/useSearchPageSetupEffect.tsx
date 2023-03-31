@@ -28,7 +28,7 @@ export const useSearchPageSetupEffect = (
   useEffect(() => {
     if (window) {
       loadSearchParamsFromUrl();
-      window.onpopstate = (e) => {
+      window.onpopstate = () => {
         loadSearchParamsFromUrl();
       };
     }

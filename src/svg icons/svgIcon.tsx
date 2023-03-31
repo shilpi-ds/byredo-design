@@ -21,9 +21,9 @@ export const svgIcons = {
           transform="translate(-15.561 -5.38)"
           fill="none"
           stroke="#fbfbfd"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <path
           id="Path_32"
@@ -32,9 +32,9 @@ export const svgIcons = {
           transform="translate(-1.5 -14.168)"
           fill="none"
           stroke="#fbfbfd"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <path
           id="Path_33"
@@ -43,9 +43,9 @@ export const svgIcons = {
           transform="translate(-1.5 -4.503)"
           fill="none"
           stroke="#fbfbfd"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
       </g>
     </svg>
@@ -54,7 +54,7 @@ export const svgIcons = {
 <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34">
   <g id="hours" transform="translate(-29 -910)">
     <circle id="Ellipse_12" data-name="Ellipse 12" cx="17" cy="17" r="17" transform="translate(29 910)"/>
-    <path id="Path_551" data-name="Path 551" d="M969,4612a8,8,0,1,1,8-8A8.011,8.011,0,0,1,969,4612Zm0-14.4a6.4,6.4,0,1,0,6.4,6.4A6.408,6.408,0,0,0,969,4597.6Zm-.566,6.968,3.2,3.2,1.131-1.136-2.966-2.96V4599.2h-1.6v4.8A.8.8,0,0,0,968.434,4604.568Z" transform="translate(-923 -3677)" fill="#fff" fill-rule="evenodd"/>
+    <path id="Path_551" data-name="Path 551" d="M969,4612a8,8,0,1,1,8-8A8.011,8.011,0,0,1,969,4612Zm0-14.4a6.4,6.4,0,1,0,6.4,6.4A6.408,6.408,0,0,0,969,4597.6Zm-.566,6.968,3.2,3.2,1.131-1.136-2.966-2.96V4599.2h-1.6v4.8A.8.8,0,0,0,968.434,4604.568Z" transform="translate(-923 -3677)" fill="#fff" fillRule="evenodd"/>
   </g>
 </svg>
   ),
@@ -73,8 +73,8 @@ export const svgIcons = {
           transform="translate(10.606 -0.586) rotate(45)"
           fill="none"
           stroke="#014c6b"
-          stroke-linecap="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeWidth="2"
         />
         <line
           y1="4.243"
@@ -82,8 +82,8 @@ export const svgIcons = {
           transform="translate(2 14)"
           fill="none"
           stroke="#014c6b"
-          stroke-linecap="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeWidth="2"
         />
       </g>
     </svg>
@@ -92,7 +92,7 @@ export const svgIcons = {
 <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34">
   <g id="address" transform="translate(-29 -740)">
     <circle id="Ellipse_10" data-name="Ellipse 10" cx="17" cy="17" r="17" transform="translate(29 740)"/>
-    <path id="Path_549" data-name="Path 549" d="M582.8,4744.8a3.2,3.2,0,0,1,6.4,0c0,2-1.967,4.64-3.2,6.032C584.768,4749.44,582.8,4746.8,582.8,4744.8Zm2.634,7.769.566.567.566-.567c.173-.176,4.234-4.28,4.234-7.769a4.8,4.8,0,0,0-9.6,0C581.2,4748.288,585.262,4752.393,585.434,4752.568ZM586,4746.4a1.6,1.6,0,1,1,1.6-1.6A1.6,1.6,0,0,1,586,4746.4Zm0,9.6c-3.853,0-8-1-8-3.2,0-.76.518-1.823,2.987-2.56l.455,1.536c-1.522.447-1.842.943-1.842,1.023,0,.408,2.2,1.6,6.4,1.6s6.4-1.192,6.4-1.6c0-.08-.318-.576-1.831-1.023l.456-1.536c2.459.736,2.975,1.8,2.975,2.56C594,4755,589.853,4756,586,4756Z" transform="translate(-540 -3991)" fill="#fff" fill-rule="evenodd"/>
+    <path id="Path_549" data-name="Path 549" d="M582.8,4744.8a3.2,3.2,0,0,1,6.4,0c0,2-1.967,4.64-3.2,6.032C584.768,4749.44,582.8,4746.8,582.8,4744.8Zm2.634,7.769.566.567.566-.567c.173-.176,4.234-4.28,4.234-7.769a4.8,4.8,0,0,0-9.6,0C581.2,4748.288,585.262,4752.393,585.434,4752.568ZM586,4746.4a1.6,1.6,0,1,1,1.6-1.6A1.6,1.6,0,0,1,586,4746.4Zm0,9.6c-3.853,0-8-1-8-3.2,0-.76.518-1.823,2.987-2.56l.455,1.536c-1.522.447-1.842.943-1.842,1.023,0,.408,2.2,1.6,6.4,1.6s6.4-1.192,6.4-1.6c0-.08-.318-.576-1.831-1.023l.456-1.536c2.459.736,2.975,1.8,2.975,2.56C594,4755,589.853,4756,586,4756Z" transform="translate(-540 -3991)" fill="#fff" fillRule="evenodd"/>
   </g>
 </svg>
 
@@ -118,7 +118,7 @@ export const svgIcons = {
 <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34">
   <g id="phone" transform="translate(-29 -816)">
     <circle id="Ellipse_11" data-name="Ellipse 11" cx="17" cy="17" r="17" transform="translate(29 816)"/>
-    <path id="Path_550" data-name="Path 550" d="M679.008,4645.672a1.648,1.648,0,0,0-1.377-.672,1.99,1.99,0,0,0-1.158.368c-.182.12-.4.28-.647.472a9.3,9.3,0,0,0-1.043,1.008,2.431,2.431,0,0,0-.782,1.568c.085,2.264,1.66,4.864,4.676,7.888s5.607,4.608,7.839,4.7h.058a2.349,2.349,0,0,0,1.555-.792,10.748,10.748,0,0,0,1-1.04c.215-.264.374-.464.48-.616a2.138,2.138,0,0,0,.382-1.392,1.631,1.631,0,0,0-.674-1.176c-1.107-.784-2.094-1.448-2.97-1.976a1.674,1.674,0,0,0-.865-.231,2.342,2.342,0,0,0-1.081.288c-.141.072-.423.232-.843.472-.451-.368-.987-.864-1.6-1.48a21.2,21.2,0,0,1-1.494-1.639c.235-.433.39-.721.466-.873a1.885,1.885,0,0,0,.059-1.912C680.218,4647.416,679.563,4646.44,679.008,4645.672Zm7.537,13.728c-1.7-.064-3.978-1.456-6.735-4.224s-4.145-5.056-4.21-6.792c0,.009.011-.008.034-.04a3.781,3.781,0,0,1,.332-.416,8.044,8.044,0,0,1,.836-.824c.23-.176.422-.312.573-.416l.027-.016a.368.368,0,0,1,.229-.072c.074,0,.077,0,.087.016.526.728,1.164,1.68,1.9,2.848.015.023.008.12-.112.344-.1.192-.33.624-.7,1.288l-.243.439.29.409a18.2,18.2,0,0,0,1.965,2.24,19.682,19.682,0,0,0,2.2,1.96l.424.312.454-.264c.653-.384,1.078-.625,1.245-.7a.768.768,0,0,1,.341-.112c.032,0,.043,0,.049.008.825.5,1.782,1.136,2.852,1.9.013.008.014.008.018.048a.561.561,0,0,1-.121.336c-.054.081-.2.256-.391.5a8.982,8.982,0,0,1-.85.88,2.394,2.394,0,0,1-.462.36Z" transform="translate(-636 -3820)" fill="#fff" fill-rule="evenodd"/>
+    <path id="Path_550" data-name="Path 550" d="M679.008,4645.672a1.648,1.648,0,0,0-1.377-.672,1.99,1.99,0,0,0-1.158.368c-.182.12-.4.28-.647.472a9.3,9.3,0,0,0-1.043,1.008,2.431,2.431,0,0,0-.782,1.568c.085,2.264,1.66,4.864,4.676,7.888s5.607,4.608,7.839,4.7h.058a2.349,2.349,0,0,0,1.555-.792,10.748,10.748,0,0,0,1-1.04c.215-.264.374-.464.48-.616a2.138,2.138,0,0,0,.382-1.392,1.631,1.631,0,0,0-.674-1.176c-1.107-.784-2.094-1.448-2.97-1.976a1.674,1.674,0,0,0-.865-.231,2.342,2.342,0,0,0-1.081.288c-.141.072-.423.232-.843.472-.451-.368-.987-.864-1.6-1.48a21.2,21.2,0,0,1-1.494-1.639c.235-.433.39-.721.466-.873a1.885,1.885,0,0,0,.059-1.912C680.218,4647.416,679.563,4646.44,679.008,4645.672Zm7.537,13.728c-1.7-.064-3.978-1.456-6.735-4.224s-4.145-5.056-4.21-6.792c0,.009.011-.008.034-.04a3.781,3.781,0,0,1,.332-.416,8.044,8.044,0,0,1,.836-.824c.23-.176.422-.312.573-.416l.027-.016a.368.368,0,0,1,.229-.072c.074,0,.077,0,.087.016.526.728,1.164,1.68,1.9,2.848.015.023.008.12-.112.344-.1.192-.33.624-.7,1.288l-.243.439.29.409a18.2,18.2,0,0,0,1.965,2.24,19.682,19.682,0,0,0,2.2,1.96l.424.312.454-.264c.653-.384,1.078-.625,1.245-.7a.768.768,0,0,1,.341-.112c.032,0,.043,0,.049.008.825.5,1.782,1.136,2.852,1.9.013.008.014.008.018.048a.561.561,0,0,1-.121.336c-.054.081-.2.256-.391.5a8.982,8.982,0,0,1-.85.88,2.394,2.394,0,0,1-.462.36Z" transform="translate(-636 -3820)" fill="#fff" fillRule="evenodd"/>
   </g>
 </svg>
   ),
@@ -149,18 +149,18 @@ export const svgIcons = {
           transform="translate(0 0)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="3"
         />
         <path
           d="M35.066,34.707,24.975,24.975"
           transform="translate(-3.249 -3.249)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="3"
         />
       </g>
     </svg>
@@ -179,20 +179,20 @@ export const svgIcons = {
           transform="translate(-48.705)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-miterlimit="10"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeMiterlimit="10"
+          strokeWidth="2"
         />
         <path
           d="M1002.691,60H980"
           transform="translate(0 -27.831)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-miterlimit="10"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeMiterlimit="10"
+          strokeWidth="2"
         />
       </g>
     </svg>
@@ -240,7 +240,7 @@ export const svgIcons = {
 </svg>),
 miles: ( 
 <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_11_858)">
+<g clipPath="url(#clip0_11_858)">
 <path d="M0 0H0.900906V9.06H0V0ZM5.40543 3.171L1.80181 5.7078V0.6342L5.40543 3.171Z" fill="black"/>
 </g>
 <defs>

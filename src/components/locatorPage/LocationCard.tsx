@@ -1,22 +1,18 @@
 import * as React from "react";
-import { useEffect, useRef, useState } from "react";
 import { CardComponent } from "@yext/search-ui-react";
 import { Location } from "..//../types/search/locations";
 import Hours from "../commons/hours";
 import Address from "..//../components/commons/Address";
-import getDirectionUrl from "../commons/GetDirection";
 import { Link } from "@yext/pages/components";
 import {
   formatPhoneNumber,
-  formatPhoneNumberIntl,
 } from "react-phone-number-input";
 import OpenCloseStatus from "..//../components/commons/OpenCloseStatus";
 import Phone from "../commons/phone";
 import { svgIcons } from "../../svg icons/svgIcon";
-import { Data } from "@react-google-maps/api";
 import { useTranslation } from "react-i18next";
 import { slugify, defaultTimeZone } from "../../config/globalConfig";
-import i18n from "../../types/i18n";
+import { useState } from "react";
 
 /**
  *
@@ -32,14 +28,8 @@ const LocationCard: CardComponent<Location> = (props: any) => {
   console.log("props", props);
   const {
     address,
-    id,
     hours,
     mainPhone,
-    c_pharmacyServices,
-    c_pharmacyServicesTitle,
-    c_getDirections,
-    c_bookAnAppointment,
-    c_facilities,
   } = props?.result?.rawData;
   const [time, setTime] = React.useState({});
   const [timezone, setTimeZone] = React.useState("");
@@ -52,9 +42,8 @@ const LocationCard: CardComponent<Location> = (props: any) => {
     if (!props.result.rawData) {
       setWithoutHourClass("withoutHours");
     }
-    // getCurrentLocationLatLng();
   });
-
+console.log('set', props.result.rawData.timezone)
   /**
    * Function to convert Date format in dd-mm-yy
    */
@@ -63,7 +52,7 @@ const LocationCard: CardComponent<Location> = (props: any) => {
   let dateNewFormat;
   function join(t: any, a: any, s: any) {
     function format(m: any) {
-      let f = new Intl.DateTimeFormat("en", m);
+      const f = new Intl.DateTimeFormat("en", m);
       return f.format(t);
     }
     return a.map(format).join(s);
@@ -87,17 +76,17 @@ const LocationCard: CardComponent<Location> = (props: any) => {
    Note-  Url returns Slug
    * If slug is available then url returns Slug otherwise it returns id-name
    */
-  var url = "";
+  let url = "";
   if (!props.result.rawData.slug) {
-    let slugString =
+    const slugString =
       props.result.rawData?.id + " " + props.result.rawData?.name;
-    let slug = slugify(slugString);
+    const slug = slugify(slugString);
     url = `${slug}.html`;
   } else {
     url = `${props.result.rawData.slug.toString()}.html`;
   }
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   /**
    * LocationCard component which returns the HTML of Locator Page Listing.
    */

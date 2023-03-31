@@ -16,7 +16,6 @@ import { nearByLocation } from "../types/nearByLocation";
 import { fetch } from "@yext/pages/util";
 import favicon from "../images/favicon.png";
 import { JsonLd } from "react-schemaorg";
-import useUpdateTranslation from "../hooks/useUpdateTranslation";
 import LocationInformation from "../components/locationDetails/LocationInformation";
 import MapImage from "../components/locationDetails/MapImage";
 import Promotion from "../components/locationDetails/Promotion";
@@ -34,8 +33,8 @@ import {
   GoogleSearchConsole,
   BaseUrl,
   AnalyticsEnableDebugging,
-  AnalyticsEnableTrackingCookie }
-  from "../config/globalConfig";
+  AnalyticsEnableTrackingCookie,
+} from "../config/globalConfig";
 import {
   savedFilterId,
   entityTypes,
@@ -78,20 +77,15 @@ export const config: TemplateConfig = {
       "c_mapImage",
       "c_promotionalProducts",
       "timezone",
-     
-
+    
       /*About Byredo*/
       "c_image",
       "c_title",
       "c_readMore",
       "description",
-      
-      /*PhotoGallery*/
-      "c_photoGalleryTitle",
-      
-      "c_locationServices.name",
-      
 
+      "c_photoGalleryTitle",
+      "c_locationServices.name",
       /*FAQ's*/
       "c_faqsTitle",
       "c_faqsDescription",
@@ -103,21 +97,6 @@ export const config: TemplateConfig = {
       "c_metaDescription",
       "c_metaTitle",
       "c_robotsTag",
-/*dm pages */
-      // "dm_directoryParents.name",
-      // "dm_directoryParents.slug",
-      // "dm_directoryParents.meta.entityType",
-      // "dm_directoryChildren.name",
-      // //"dm_directoryChildren.entityId",
-      // "dm_directoryChildren.address",
-      // "dm_directoryChildren.slug",
-      // "dm_directoryChildren.dm_directoryChildren.name",
-      // "dm_directoryChildren.dm_directoryChildrenCount",
-      // "dm_directoryChildren.dm_directoryChildren.slug",
-      // "dm_directoryChildren.dm_directoryChildren.meta.entityType",
-      // "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.name",
-      // "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.slug",
-      // "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.id"
     ],
 
     // Defines the scope of entities that qualify for this stream.
@@ -165,17 +144,17 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 }): HeadConfig => {
   let url = "";
   if (!document.slug) {
-    let slugString = document.id + " " + document.name;
-    let slug = slugify(slugString);
+    const slugString = document.id + " " + document.name;
+    const slug = slugify(slugString);
     url = `${slug}.html`;
   } else {
     url = `${document.slug?.toString()}.html`;
   }
   // <meta name="google-site-verification" content="WIqhwAw2ugRAKEYRRqis1ZfUBbnWe_AXSoDltHceCbI" />
-  let metaDescription = document.c_metaDescription
+  const metaDescription = document.c_metaDescription
     ? document.c_metaDescription
     : `${document.name} | Shop Byredos Collection of Perfumes, Candles, Makeup, Leather And Body Care. Free shipping & Free returns. Complimentary samples.`;
-  let metaTitle = document.c_metaTitle
+  const metaTitle = document.c_metaTitle
     ? document.c_metaTitle
     : `${document.name} | BYREDO Official Site | Perfumes, Candles & Body Care`;
   return {
@@ -312,14 +291,14 @@ type ExternalApiData = TemplateProps & { externalApiData: nearByLocation };
 export const transformProps: TransformProps<ExternalApiData> = async (
   data: any
 ) => {
-  let latitude = data?.document?.yextDisplayCoordinate?.latitude;
-  let longitude = data?.document?.yextDisplayCoordinate?.longitude;
-  const url = `${AnswerExperienceConfig.endpoints.verticalSearch}?experienceKey=${AnswerExperienceConfig.experienceKey}&api_key=${AnswerExperienceConfig.apiKey}&v=20220511&version=${AnswerExperienceConfig.experienceVersion}&locale=${data.document.meta.locale}&location=${latitude},${longitude}&verticalKey=${AnswerExperienceConfig.verticalKey}&limit=4&retrieveFacets=true&skipSpellCheck=false&session_id=12727528-aa0b-4558-9d58-12a815eb3761&sessionTrackingEnabled=true&source=STANDARD`;
+  const latitude = data?.document?.yextDisplayCoordinate?.latitude;
+  const longitude = data?.document?.yextDisplayCoordinate?.longitude;
+const url = `${AnswerExperienceConfig.endpoints.verticalSearch}?experienceKey=${AnswerExperienceConfig.experienceKey}&api_key=${AnswerExperienceConfig.apiKey}&v=20220511&version=${AnswerExperienceConfig.experienceVersion}&locale=${data.document.meta.locale}&location=${latitude},${longitude}&verticalKey=${AnswerExperienceConfig.verticalKey}&limit=4&retrieveFacets=true&skipSpellCheck=false&session_id=12727528-aa0b-4558-9d58-12a815eb3761&sessionTrackingEnabled=true&source=STANDARD`;
   const externalApiData = (await fetch(url).then((res: any) =>
     res.json()
   )) as nearByLocation;
-
   return { ...data, externalApiData };
+
 };
 
 type ExternalApiRenderData = TemplateRenderProps & {
@@ -347,9 +326,6 @@ const Location: Template<ExternalApiRenderData> = ({
     c_photoCategories,
     c_promotionalProducts,
     c_locationServices,
-
-    //c_aboutImages,
-    c_faqsTitle,
     c_title,
     description,
     c_image,
@@ -357,21 +333,11 @@ const Location: Template<ExternalApiRenderData> = ({
     c_canonicalURL,
     c_photoGalleryTitle,
     c_mapImage,
- 
-    geomodifier,
-    c_faqsDescription,
-   
-    geocodedCoordinate,
-
-    //dm_directoryParents,
-    //dm_directoryChildren
   } = document;
-
-  let templateData = { document: document, __meta: __meta };
-  
-  let hoursSchema = [];
-  let breadcrumbScheme = [];
-  for (var key in hours) {
+  const templateData = { document: document, __meta: __meta };
+  //const { t, i18n } = useTranslation();
+  const hoursSchema = [];
+  for (const key in hours) {
     if (hours.hasOwnProperty(key)) {
       let openIntervalsSchema = "";
       if (key !== "holidayHours") {
@@ -384,8 +350,8 @@ const Location: Template<ExternalApiRenderData> = ({
           let end = "";
           let start = "";
           if (typeof hours[key].openIntervals != "undefined") {
-            let openIntervals = hours[key].openIntervals;
-            for (var o in openIntervals) {
+            const openIntervals = hours[key].openIntervals;
+            for (const o in openIntervals) {
               if (openIntervals.hasOwnProperty(o)) {
                 end = openIntervals[o].end;
                 start = openIntervals[o].start;
@@ -406,25 +372,13 @@ const Location: Template<ExternalApiRenderData> = ({
     }
   }
 
-  // let url = "";
-  // if (!document.slug) {
-  //   let slugString = document.id + " " + document.name;
-  //   let slug = slugify(slugString);
-  //   url = `${slug}.html`;
-  // } else {
-  //   url = `${document.slug.toString()}.html`;
-  // }
-  //console.log(name,"name");
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   i18n.changeLanguage(document.meta.locale);
-  //useUpdateTranslation(_site, document.meta.locale);
 
-  var currentUrl = ""
+  let currentUrl = ""
   const myArray = path.split("/");
   currentUrl = myArray && myArray[1]
-  //console.log(currentUrl,"CURRENT")
   const updatelocale = (locale: any) => {
-    //console.log(locale,"test");
     return (window.location.pathname = `${locale}/${currentUrl}`);
   };
   return (
@@ -462,15 +416,29 @@ const Location: Template<ExternalApiRenderData> = ({
         }}
       />
 
-      {/* <JsonLd<BreadcrumbList>
-        item={{
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: breadcrumbScheme,
-        }} */}
-      {/* /> */}
+      {c_relatedFaqs && (
+        <>
+          <JsonLd<FAQPage>
+            item={{
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
 
-      
+              mainEntity:
+                c_relatedFaqs &&
+                c_relatedFaqs.map((i: any) => {
+                  return {
+                    "@type": "Question",
+                    name: i.question,
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: `<p>${i.answer}</p>`,
+                    },
+                  };
+                }),
+            }}
+          />
+        </>
+      )}
 
       <AnalyticsProvider
         templateData={templateData}
@@ -483,14 +451,11 @@ const Location: Template<ExternalApiRenderData> = ({
             ByredoLogo={_site.c_byradoLogo}
             ByredoLinks={_site.c_headerMenus}
           />
-
-
           {/* <BreadCrumbs
             name={name}
             parents={dm_directoryParents}
             address={address}
           ></BreadCrumbs> */}
-      
           <LocationInformation
             prop={hours}
             coords={yextDisplayCoordinate}
@@ -503,12 +468,11 @@ const Location: Template<ExternalApiRenderData> = ({
             name={name}
             services={c_locationServices}
           />
-          {c_mapImage && (
           <MapImage image={c_mapImage}
             coords={yextDisplayCoordinate}
             address={address}
           />
-          )}
+
           <div className="mt-8 md:mt-10">
             {c_title && (
               <About
@@ -531,11 +495,10 @@ const Location: Template<ExternalApiRenderData> = ({
 
             />
           )}
-      
+
           <NearByLocation
             prop={externalApiData}
-            // parents={dm_directoryParents}
-            //BaseUrl={relativePrefixToRoot}
+            baseUrl={relativePrefixToRoot}
             coords={yextDisplayCoordinate}
             slug={slug}
             timezone={timezone}
@@ -546,7 +509,6 @@ const Location: Template<ExternalApiRenderData> = ({
             <Link className="button" href="/index.html">
 
               {_site.c_viewMoreLocations}
-              {/* {svgIcons.ViewMoreLocation} */}
             </Link>
           </div>
           <Footer

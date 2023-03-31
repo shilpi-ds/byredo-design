@@ -117,4 +117,4 @@ export default function DropdownSection({
       </div>
     </div>
   );
-};
+}

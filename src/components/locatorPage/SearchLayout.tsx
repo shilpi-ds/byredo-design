@@ -1,3 +1,4 @@
+import { Wrapper } from "@googlemaps/react-wrapper";
 import { Link } from "@yext/pages/components";
 import { useSearchActions, useSearchState } from "@yext/search-headless-react";
 import $ from "jquery";
@@ -6,10 +7,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import useFetchResults from "../../hooks/useFetchResults";
 import { svgIcons } from "../../svg icons/svgIcon";
-import {
-  googleMapsConfig,
-  limit
-} from "..//../config/globalConfig";
+import {googleMapsConfig,limit} from "..//../config/globalConfig";
 import VerticalResults from "../VerticalResults";
 import { GoogleMaps } from "./GoogleMaps";
 import LocationCard from "./LocationCard";
@@ -36,16 +34,10 @@ const SearchLayout = (props: any): JSX.Element => {
     useSearchState(
       (s) => s.vertical.noResults?.allResultsForVertical.results
     ) || [];
-  const [optiontext, setOptiontext] = React.useState("");
   const [check, setCheck] = React.useState(false);
   const [showNotFound, setShowNotFound] = React.useState(false);
-  const [inputvalue, setInputValue] = React.useState("");
-  const [allowlocation, setallowLocation] = React.useState("");
-  const [userShareLocation, setUserShareLocation] = React.useState(false);
-  const [offset, setOffset] = React.useState(0);
   const searchActions = useSearchActions();
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
-  const [optionclick, setOptionClick] = React.useState(true)
   let firstTimeRunners = true;
 
   const FirstLoad = () => {
@@ -63,10 +55,6 @@ const SearchLayout = (props: any): JSX.Element => {
           searchActions.setOffset(0);
           searchActions.executeVerticalQuery();
         },
-        function () {
-          /* if (error.code == error.PERMISSION_DENIED) {
-          } */
-        }
       );
     }
     searchActions.setUserLocation({
@@ -100,10 +88,14 @@ const SearchLayout = (props: any): JSX.Element => {
   };
 
   const _site = props._site;
-
   return (
     <>
       {/* {loader} */}
+      <Wrapper
+        apiKey={googleMapsConfig.googleMapsApiKey}
+        language={"en_GB"}
+        libraries={["places", "geometry"]}
+      >
       <div className="locator-full-width place-content-center">
         <div className="locator-container">
           {/* Map view and List View CTA in mobile responsive  */}
@@ -160,7 +152,7 @@ const SearchLayout = (props: any): JSX.Element => {
           </div>
           <div className="result-listing">
             <ResultsCount />
-            {alternateResult && alternateResult.length > 0 && (
+                {showNotFound && (
               <p className="pt-2 pb-3 text-lg text-center no-lc-err-msg">
                 {_site.c_noLocationFound}
               </p>
@@ -199,6 +191,7 @@ const SearchLayout = (props: any): JSX.Element => {
           </div>
         </div>
       </div>
+      </Wrapper>
     </>
   );
 };

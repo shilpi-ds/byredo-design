@@ -1,6 +1,4 @@
 import * as React from "react";
-
-
 type props = {
   prop: any;
   promo: any;
@@ -14,10 +12,7 @@ type props = {
  */
 
 const Promotion = (props: any) => {
-  //const { image,map} = props;  
-//console.log(props,"promo");
-  
-  return (
+ return (
     <>
     {props.promo.image.url && props.promo.title &&
    <div className="relative mt-[60px]">

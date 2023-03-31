@@ -53,11 +53,9 @@ export function ResultsCountDisplay({
   const currentFirst = 1
   const currentLast = offset + resultsLength;
   const total = resultsCount;
-  let messageArray = [
+  const messageArray = [
      t("Showing Result Count",{currentFirst,currentLast:offset + resultsLength,total:resultsCount})
   ];
-  console.log('first', total)
-
   const spanArray = messageArray.map((value, index) => {
     const isNumber = typeof value === 'number';
     

@@ -1,4 +1,3 @@
-import { Wrapper } from "@googlemaps/react-wrapper";
 import { useSearchState, Result } from "@yext/search-headless-react";
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
@@ -7,7 +6,6 @@ import {
   useComposedCssClasses,
 } from "..//../hooks/useComposedCssClasses";
 import { useTranslation } from "react-i18next";
-import useFetchResults from "../../hooks/useFetchResults";
 import Address from "../commons/Address";
 import { Link } from "@yext/pages/components";
 import Phone from "../commons/phone";
@@ -19,7 +17,6 @@ import { renderToString } from "react-dom/server";
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 import OpenCloseStatus from "..//../components/commons/OpenCloseStatus";
 import clustericon from "../../images/cluster1.png";
-import getDirectionUrl from "../commons/GetDirection";
 import { slugify, defaultTimeZone, silverMapStyle } from "../../config/globalConfig";
 import $ from "jquery";
 let marker: any;
@@ -74,9 +71,7 @@ let location: any;
 export function GoogleMaps(props: GoogleMapsProps) {
   return (
     <div>
-      <Wrapper apiKey={props.apiKey}>
-        <UnwrappedGoogleMaps {...props} />
-      </Wrapper>
+        <UnwrappedGoogleMaps {...props} />  
     </div>
   );
 }
@@ -93,7 +88,6 @@ function UnwrappedGoogleMaps({
   setActiveIndex,
   providerOptions,
   customCssClasses,
-  check,
   site,
 }: UnwrappedGoogleMapsProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -108,7 +102,7 @@ function UnwrappedGoogleMaps({
   const usermarker = useRef<google.maps.Marker[]>([]);
   const infoWindow = useRef(new google.maps.InfoWindow());
 
-  locationResults.map((result: any, i: Number) => {
+  locationResults.map((result: any, i: number) => {
     if (i == 0) {
       center = {
         lat: result.rawData.yextDisplayCoordinate
@@ -137,7 +131,7 @@ function UnwrappedGoogleMaps({
   if (noResults && !showEmptyMap) {
     containerCssClass = twMerge(cssClasses.googleMapsContainer, "hidden");
   }
-  let pinStyles = {
+  const pinStyles = {
     fill: "#4e9c34", //default google red
     stroke: "#4e9c34",
     text: "white",
@@ -145,21 +139,9 @@ function UnwrappedGoogleMaps({
     stroke_selected: "#4e9c34",
     text_selected: "white",
   };
-
-  /** Marker icon*/
-  // let marker_icon = {
-  //   url: Mapicon,
-  //   fillColor: pinStyles.fill,
-  //   scale: 0.8,
-  //   fillOpacity: 1,
-  //   strokeColor: pinStyles.stroke,
-  //   strokeWeight: 1,
-  //   labelOrigin: new google.maps.Point(21, 22),
-  // };
-
-
+  
   /** Marker Hover icon*/
-  let marker_hover_icon = {
+  const marker_hover_icon = {
     url: MapiconHover,
     fillColor: pinStyles.fill,
     scale: 0.8,
@@ -389,20 +371,17 @@ function UnwrappedGoogleMaps({
     });
   }
 
-  function sleep(ms: any) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
   /** Active and Remove Grid */
 
   function addActiveGrid(index: number) {
-    let elements = document.querySelectorAll(".result");
+    const elements = document.querySelectorAll(".result");
     for (let index = 0; index < elements.length; index++) {
       elements[index].classList.remove("active");
     }
     document.querySelectorAll(".result")[index].classList.add("active");
   }
   function removeActiveGrid(index: any) {
-    let elements = document.querySelectorAll(".result");
+    const elements = document.querySelectorAll(".result");
     for (let index = 0; index < elements.length; index++) {
       elements[index].classList.remove("active");
     }
@@ -415,9 +394,9 @@ function UnwrappedGoogleMaps({
     marker_hover_icon: any,
     marker_icon: any
   ) {
-    let elements = document.querySelectorAll(".result");
+    const elements = document.querySelectorAll(".result");
     for (let index = 0; index < elements.length; index++) {
-      elements[index].addEventListener("mouseover", (e) => {
+      elements[index].addEventListener("mouseover", () => {
         if (hover) {
           markerPins.current[index].setIcon(marker_hover_icon);
           if ($(window).width > 700) {
@@ -532,14 +511,14 @@ function UnwrappedGoogleMaps({
     return miles.toFixed(2);
   };
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   /** Function InfowindowContents returns Html*/
-  function InfowindowContents(i: Number, result: any): void {
+  function InfowindowContents(i: number, result: any): void {
     console.log('result.rawData.timezone', result.rawData.timezone)  
-    var url = "";
+    let url = "";
     if (!result.rawData.slug) {
-      let slugString = result?.id + " " + result?.name;
-      let slug = slugify(slugString);
+      const slugString = result?.id + " " + result?.name;
+      const slug = slugify(slugString);
       url = `${slug}.html`;
     } else {
       url = `${result.rawData.slug.toString()}.html`;
@@ -633,25 +612,22 @@ function UnwrappedGoogleMaps({
     //   const someButton = document.getElementById("some-button1");
     //   someButton?.addEventListener("click", mobiledirection);
     // });
-
-    let string = renderToString(MarkerContent);
+    const string = renderToString(MarkerContent);
     infoWindow.current.setContent(string);
   }
 
-
-
-  // function getMarkerHoverPin(result: any) {
+ // function getMarkerHoverPin(result: any) {
   //   let hover_icon = marker_hover_icon;
   //   if (typeof result.rawData.c_storeType != "undefined") {
   //     if (result.rawData.c_storeType == "Departmental Stores") {
   //       hover_icon = {
-  //         url: retailersHoverPin,
+  //         url: Mapicon1,
   //       };
   //     } else if (
   //       result.rawData.c_storeType == "Byredo Stores"
   //     ) {
   //       hover_icon = {
-  //         url: storesHoverPin,
+  //         url: Mapicon,
   //       };
   //     }
   //   }
@@ -705,9 +681,9 @@ function getPosition(result: Result) {
   return { lat, lng };
 }
 export function scrollToRow(index: any) {
-  let result: any = [].slice.call(document.querySelectorAll(`.result`) || [])[0];
-  let offset: any = [].slice.call(document.querySelectorAll(`.result`) || [])[index];
-  let o = offset.offsetTop - result.offsetTop;
+  const result: any = [].slice.call(document.querySelectorAll(`.result`) || [])[0];
+  const offset: any = [].slice.call(document.querySelectorAll(`.result`) || [])[index];
+  const o = offset.offsetTop - result.offsetTop;
   [].slice.call(document.querySelectorAll(".scrollbar-container") || []).forEach(function (el: any) {
     el.scrollTop = o;
   });
