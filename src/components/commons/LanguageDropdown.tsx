@@ -54,10 +54,10 @@ function LocalesDropdown(props: any) {
   return (
     <div>
       <form>
-        <select onChange={(e) => handleClick(e)}>
+        <select onChange={(e) => handleClick(e)} value={section} defaultValue={section}>
           {props.country?.map((e: any, ind: any) => {
             return (
-              <option value={ind}>
+              <option value={ind} >
                 {e.country}
               </option>
             );
@@ -75,7 +75,7 @@ function LocalesDropdown(props: any) {
               <option
                 value={el.languageCode}
                 key={indd}
-                
+               
               >
                 {el.language}
               </option>
