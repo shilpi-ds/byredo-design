@@ -5,8 +5,10 @@ type data = {
   name: any;
   parents: any;
   address: any;
+  locale:any;
 };
 const BreadCrumbs = (props: data) => {
+  console.log(props.locale,"bread");
   const [list, setList] = React.useState(null);
   let breadcrumbs;
   const data: any = [];
@@ -15,8 +17,18 @@ const BreadCrumbs = (props: data) => {
   }, [setList]);
 
   const setURL = (parents: any) => {
+   
     if (parents) {
+      console.log(parents.length) 
       for (let i = 0; i < parents.length; i++) {
+        console.log(parents[i].meta.entityType.id,"hj");
+        if (parents[i].meta.entityType.id == "ce_continents") {
+          data.push({
+            name: parents[i].name,
+            slug: parents[i].slug,
+            childrenCount: parents[i].dm_directoryChildrenCount,
+          });
+        }
         if (parents[i].meta.entityType.id == "ce_country") {
           data.push({
             name: parents[i].name,
@@ -89,7 +101,7 @@ const BreadCrumbs = (props: data) => {
       breadcrumbs = data?.map((crumb: any, index: any) => (
         <li key={crumb.slug}>
           <Link
-            href={`${BaseUrl}/${crumb.slug}.html`}
+            href={`/${props.locale}/${crumb.slug}.html`}
             rel="noopener noreferrer"
             eventName={"BreadCrumbs" + (index + 1)}
           >
@@ -107,8 +119,8 @@ const BreadCrumbs = (props: data) => {
     <div className="breadcrumb">
       <div className="container">
         <ul>
-          <li className="home-li">
-            <Link href="/index.html">Home</Link>
+          <li className="home">
+            <Link href={`/${props.locale}/index.html`}>Home</Link>
           </li>
           {list && (
             list)
