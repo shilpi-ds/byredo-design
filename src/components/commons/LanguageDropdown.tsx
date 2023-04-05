@@ -22,11 +22,12 @@ function LocalesDropdown(props: any) {
 
   const handleClick = (e: any) => {
     setSection(e.target.value);
-    setLanguage(props.country[e.target.value].language[0].languageCode);
+    //setLanguage(props.country[e.target.value].language[0].languageCode);
     props.updatelocale(props.country[e.target.value].language[0].languageCode);
-    setLocale(e.target[e.target.value].text);
+    //setLocale(e.target[e.target.value].text);
   };
   useEffect(() => {
+    console.log(props.country,"props.country")
     const Result = props.country?.filter((res: any, index: number) => {
       return (
         res.language &&
@@ -51,6 +52,8 @@ function LocalesDropdown(props: any) {
 /**
  * Return results for country & language dropdown
  */
+
+
   return (
     <div>
       <form>
