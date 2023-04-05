@@ -2,6 +2,7 @@ import * as React from "react";
 import Header from "../components/layouts/header";
 import Footer from "../components/layouts/footer";
 import Continent from "../components/dm/Continent";
+import BreadCrumbs from "../components/layouts/BreadCrumb";
 import { useTranslation } from "react-i18next";
 import { slugify } from "../config/globalConfig";
 import "../types/i18n.ts";
@@ -105,7 +106,13 @@ const Root: Template<TemplateRenderProps> = ({
         ByredoLogo={_site.c_byradoLogo}
         ByredoLinks={_site.c_headerMenus}
       />
-    
+       <BreadCrumbs
+                        name={name}
+                        address={""}
+                        locale={document.meta.locale}
+                        parents={undefined}
+                        mainparent={document._site.c_relatedContinent}
+                    />
         <>
           <div className="directory-country py-5 lg:py-[60px]">
             <Continent child={c_children} locale={document.meta.locale}/>
