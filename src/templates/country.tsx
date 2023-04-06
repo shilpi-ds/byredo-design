@@ -291,13 +291,14 @@ const country: Template<TemplateRenderProps> = ({
         if (entity.dm_baseEntityCount == 1) {
           entity.dm_directoryChildren &&
             entity.dm_directoryChildren.map((res: any) => {
+              //console.log(res,"resssssssssssss");
               let name: any = res.name.toLowerCase();
               name = name.toString();
               name = name.replaceAll(" ", "-");
 
               if (res.slug) {
-                console.log(res.slug,"slug")
-                detlslug =  res.slug;
+                //console.log(res.slug,"slug")
+                detlslug =  "../"+res.slug;
                 detlslug = slugify(detlslug) + ".html";
               } else {
                 detlslug = res.id + "-" + name;
@@ -327,7 +328,7 @@ const country: Template<TemplateRenderProps> = ({
             });
         }
       }
-
+console.log(detlslug,"slugggggggggg");
       return (
         <>
           <a key={entity.slug} href={detlslug}>
@@ -375,7 +376,7 @@ return parent.dm_directoryParents[index];
                 <div className="directory-location-box">
                   <div className="directory-box-inner">
                     <div className="region-name">
-                      <h2>Country</h2>
+                      <h2>{regionNames.of(name)}</h2>
                     </div>
                     <div className="country-name">
                       {childrenDivs ? childrenDivs : ""}
