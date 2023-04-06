@@ -8,7 +8,7 @@ type data = {
   locale:any;
 };
 const BreadCrumbs = (props: data) => {
-  console.log(props.locale,"bread");
+  //console.log(props.locale,"bread");
   const [list, setList] = React.useState(null);
   let breadcrumbs;
   const data: any = [];
@@ -19,9 +19,9 @@ const BreadCrumbs = (props: data) => {
   const setURL = (parents: any) => {
    
     if (parents) {
-      console.log(parents.length) 
+     // console.log(parents.length) 
       for (let i = 0; i < parents.length; i++) {
-        console.log(parents[i].meta.entityType.id,"hj");
+        //console.log(parents[i].meta.entityType.id,"hj");
         if (parents[i].meta.entityType.id == "ce_continents") {
           data.push({
             name: parents[i].name,

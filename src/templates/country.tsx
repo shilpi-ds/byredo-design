@@ -296,7 +296,8 @@ const country: Template<TemplateRenderProps> = ({
               name = name.replaceAll(" ", "-");
 
               if (res.slug) {
-                detlslug = "/" + document.meta.locale + "/" + res.slug;
+                console.log(res.slug,"slug")
+                detlslug =  res.slug;
                 detlslug = slugify(detlslug) + ".html";
               } else {
                 detlslug = res.id + "-" + name;
@@ -347,7 +348,7 @@ const country: Template<TemplateRenderProps> = ({
 return parent.dm_directoryParents[index];
 //});
   });
-  console.log(parents, "parent")
+ // console.log(parents, "parent")
   return (
     <>
       <Header
@@ -362,6 +363,9 @@ return parent.dm_directoryParents[index];
         locale={document.meta.locale}
       //Baseurl={relativePrefixToRoot}
       ></BreadCrumbs>
+       {/* <div className="directory-country py-5 lg:py-[60px]">
+            <Continent child={c_children} locale={document.meta.locale}/>
+          </div> */}
       {dm_directoryChildren ? (
         <>
 

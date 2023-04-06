@@ -111,13 +111,13 @@ const Root: Template<TemplateRenderProps> = ({
                         address={""}
                         locale={document.meta.locale}
                         parents={undefined}
-                        mainparent={document._site.c_relatedContinent}
+                        //mainparent={document._site.c_relatedContinent}
                     />
-        <>
+        
           <div className="directory-country py-5 lg:py-[60px]">
             <Continent child={c_children} locale={document.meta.locale}/>
           </div>
-        </>
+        
       
       <Footer
         footerHelpSection={_site.c_footerHelpSection}
