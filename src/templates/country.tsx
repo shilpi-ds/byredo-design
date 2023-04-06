@@ -343,14 +343,14 @@ const country: Template<TemplateRenderProps> = ({
     });
 
 
-  //console.log(dm_directoryParents,"ddddddddddd")
-  const parents = dm_directoryParents.map((parent: any,index:any) => {
-    console.log(parent, "parentssss")
-    //parent.dm_directoryParents.map((child: any) => {
-return parent.dm_directoryParents[index];
-//});
-  });
- // console.log(parents, "parent")
+//   //console.log(dm_directoryParents,"ddddddddddd")
+//   const parents = dm_directoryParents.map((parent: any,index:any) => {
+//     console.log(parent, "parentssss")
+//     //parent.dm_directoryParents.map((child: any) => {
+// return parent.dm_directoryParents[index];
+// //});
+//   });
+//  // console.log(parents, "parent")
   return (
     <>
       <Header
@@ -361,7 +361,7 @@ return parent.dm_directoryParents[index];
       <BreadCrumbs
         name={regionNames.of(name)}
         address={address}
-        parents={parents}
+        parents={dm_directoryParents}
         locale={document.meta.locale}
       //Baseurl={relativePrefixToRoot}
       ></BreadCrumbs>
