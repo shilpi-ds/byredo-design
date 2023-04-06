@@ -83,7 +83,7 @@ export const config: TemplateConfig = {
       "c_title",
       "c_readMore",
       "description",
-
+"dm_directoryParents",
       "c_photoGalleryTitle",
       "c_locationServices.name",
       /*FAQ's*/
@@ -91,7 +91,7 @@ export const config: TemplateConfig = {
       "c_faqsDescription",
       "c_relatedFaqs.question",
       "c_relatedFaqs.answer",
-"dm_directoryParents",
+
       /*seo*/
       "c_canonicalURL",
       "c_metaDescription",
@@ -318,7 +318,7 @@ const Location: Template<ExternalApiRenderData> = ({
     hours,
     slug,
     mainPhone,
-    __meta,,
+    __meta,
     dm_directoryParents,
     additionalHoursText,
     yextDisplayCoordinate,
