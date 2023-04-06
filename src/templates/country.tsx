@@ -277,7 +277,7 @@ const country: Template<TemplateRenderProps> = ({
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
   let currentUrl = ""
   const myArray = path.split("/");
-  currentUrl = myArray && myArray[1]
+  currentUrl = myArray && myArray[2]
   const updatelocale = (locale: any) => {
     return (window.location.pathname = `${locale}/${currentUrl}`);
   };
@@ -328,7 +328,7 @@ const country: Template<TemplateRenderProps> = ({
             });
         }
       }
-console.log(detlslug,"slugggggggggg");
+//console.log(detlslug,"slugggggggggg");
       return (
         <>
           <a key={entity.slug} href={BaseUrl+"/"+detlslug}>
