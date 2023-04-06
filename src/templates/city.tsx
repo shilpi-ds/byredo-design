@@ -274,7 +274,7 @@ const City: Template<TemplateRenderProps> = ({
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
   let currentUrl = ""
   const myArray = path.split("/");
-  currentUrl = myArray && myArray[1]
+  currentUrl = myArray && myArray[1]+"/"+myArray[2]+"/"+myArray[3];
   const updatelocale = (locale: any) => {
     return (window.location.pathname = `${locale}/${currentUrl}`);
   };

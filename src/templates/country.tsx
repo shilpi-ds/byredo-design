@@ -278,7 +278,7 @@ const country: Template<TemplateRenderProps> = ({
   let currentUrl = ""
   const myArray = path.split("/");
   currentUrl = myArray && myArray[1]+"/"+myArray[2];
-  console.log(currentUrl,"urlllll");
+  //console.log(currentUrl,"urlllll");
   const updatelocale = (locale: any) => {
     return (window.location.pathname = `${locale}/${currentUrl}`);
   };
