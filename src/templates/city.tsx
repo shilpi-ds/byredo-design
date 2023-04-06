@@ -97,21 +97,26 @@ export const config: TemplateConfig = {
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
   //let uniqueId = generateUniqueId();
+  console.log(document.dm_directoryParents,"dmmmmmmmmmmm");
   if (document.dm_directoryParents) {
       document.dm_directoryParents.map((i: any) => {
           if (i.meta.entityType.id == "ce_root") {
               currentUrl = `${i.slug}/${document.slug.toString()}.html`;
           } else if (i.meta.entityType.id == "ce_country") {
-              let url = `${document.dm_directoryParents[0]?.slug}/${i.slug
+              let url = `${document.dm_directoryParents[1]?.slug}/${i.slug
                   }/${document.slug.toString()}.html`;
               currentUrl = url;
           }
       });
+      console.log(`${document.meta.locale}/${currentUrl}`,"gfgfdgdfg");
       return `${document.meta.locale}/${currentUrl}`;
   } else {
+    console.log(`${document.meta.locale
+    }/${document.slug.toString()}.html`,"aaaaaaaaaaaaa");
       return `${document.meta.locale
           }/${document.slug.toString()}.html`;
   }
+  
 };
 
 
