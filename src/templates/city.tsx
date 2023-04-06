@@ -56,10 +56,30 @@ export const config: TemplateConfig = {
       "name",
       "slug",
       "address",
+      // "dm_directoryParents.name",
+      // "dm_directoryParents.slug",
+      // "dm_directoryParents.meta.entityType",
+      // "dm_directoryChildren.name",
+      
       "dm_directoryParents.name",
       "dm_directoryParents.slug",
       "dm_directoryParents.meta.entityType",
+      "dm_directoryParents.dm_directoryParents.name",
+      "dm_directoryParents.dm_directoryParents.slug",
+      "dm_directoryParents.dm_directoryParents.meta.entityType",
+      /* DM children */
       "dm_directoryChildren.name",
+      //"dm_directoryChildren.slug",
+      "dm_directoryChildren.meta.entityType",
+     // "dm_directoryChildren.dm_baseEntityCount",
+      /* DM children->children */
+      "dm_directoryChildren.dm_directoryChildren.dm_baseEntityCount",
+      "dm_directoryChildren.dm_directoryChildren.slug",
+      "dm_directoryChildren.dm_directoryChildren.name",
+      "dm_directoryChildren.dm_directoryChildren.id",
+      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.dm_baseEntityCount",
+
+
       "dm_directoryChildren.mainPhone",
       "dm_directoryChildren.slug",
       "dm_directoryChildren.id",
@@ -442,6 +462,7 @@ const City: Template<TemplateRenderProps> = ({
       name: document.name,
     },
   });
+
   return (
     <>
       <Header

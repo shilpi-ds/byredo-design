@@ -1,6 +1,7 @@
 import * as React from "react";
 import { slugify, BaseUrl } from "../../config/globalConfig";
 import { Link } from "@yext/pages/components";
+const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 type data = {
   name: any;
   parents: any;
@@ -19,9 +20,10 @@ const BreadCrumbs = (props: data) => {
   const setURL = (parents: any) => {
    
     if (parents) {
-     // console.log(parents.length) 
+     //console.log(parents.length)
+     //console.log(parents,"length") 
       for (let i = 0; i < parents.length; i++) {
-        //console.log(parents[i].meta.entityType.id,"hj");
+        console.log(parents[i].meta.entityType.id,"hj");
         if (parents[i].meta.entityType.id == "ce_continents") {
           data.push({
             name: parents[i].name,
@@ -29,12 +31,18 @@ const BreadCrumbs = (props: data) => {
             childrenCount: parents[i].dm_directoryChildrenCount,
           });
         }
+        else if (parents[i].meta.entityType.id == "ce_root") {
+          
+          parents[i].name = parents[i].name;
+          parents[i].slug = parents[i].slug;
+        }
         if (parents[i].meta.entityType.id == "ce_country") {
+          //console.log(parents[i].dm_directoryParents[1],"frrrrrrrrr");
           data.push({
-            name: parents[i].name,
-            slug: parents[i].slug,
+            name: regionNames.of(parents[i].name),
+            slug: parents[i].dm_directoryParents[1].slug+"/"+parents[i].slug,
             childrenCount: parents[i].dm_directoryChildrenCount,
-          });
+          }); 
         } 
         else if (parents[i]?.meta?.entityType?.id == "ce_region") {
           const regionSlugPrifix = [];
@@ -98,6 +106,7 @@ const BreadCrumbs = (props: data) => {
         //   });
         // }
         else if (parents[i].meta.entityType.id == "ce_city") {
+          //console.log(parents[i],"iiiiii");
           parents[i].name = parents[i].name;
           parents[i].slug =
             parents[i - 1].slug + "/" + parents[i].slug;
