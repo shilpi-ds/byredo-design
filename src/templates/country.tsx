@@ -298,7 +298,7 @@ const country: Template<TemplateRenderProps> = ({
 
               if (res.slug) {
                 //console.log(res.slug,"slug")
-                detlslug =  BaseUrl+"/"+document.meta.locale+"/"+res.slug;
+                detlslug =  res.slug;
                 detlslug = slugify(detlslug) + ".html";
               } else {
                 detlslug = res.id + "-" + name;
@@ -331,7 +331,7 @@ const country: Template<TemplateRenderProps> = ({
 console.log(detlslug,"slugggggggggg");
       return (
         <>
-          <a key={entity.slug} href={detlslug}>
+          <a key={entity.slug} href={BaseUrl+"/"+document.meta.locale+"/"+detlslug}>
             {entity.name}
             <sup className="ml-0.5">
               {entity.dm_baseEntityCount ? entity.dm_baseEntityCount : ""}
