@@ -298,7 +298,7 @@ const country: Template<TemplateRenderProps> = ({
 
               if (res.slug) {
                 //console.log(res.slug,"slug")
-                detlslug =  "../"+res.slug;
+                detlslug =  BaseUrl+"/"+document.meta.locale+"/"+res.slug;
                 detlslug = slugify(detlslug) + ".html";
               } else {
                 detlslug = res.id + "-" + name;
