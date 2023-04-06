@@ -44,7 +44,7 @@ export const GoogleSearchConsole = {
     content: "WIqhwAw2ugRAKEYRRqis1ZfUBbnWe_AXSoDltHceCbI"
 }
 export const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
-export const BaseUrl = "https://main-strongly--mushy--sole-sbx-pgsdemo-com.sbx.preview.pagescdn.com"
+export const BaseUrl = "https://main-brightly--basic--pegasus-sbx-pgsdemo-com.sbx.preview.pagescdn.com"
 export const AnswerExperienceConfig = {
     experienceKey: "byredo",
     locale: "en_GB",
