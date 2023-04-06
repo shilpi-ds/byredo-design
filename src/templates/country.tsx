@@ -298,8 +298,8 @@ const country: Template<TemplateRenderProps> = ({
 
               if (res.slug) {
                 //console.log(res.slug,"slug")
-                detlslug =  document.meta.locale+"/"+res.slug;
-                detlslug = slugify(detlslug) + ".html";
+                detlslug =  document.meta.locale + "/" + res.slug;
+                detlslug = detlslug + ".html";
               } else {
                 detlslug = res.id + "-" + name;
                 detlslug =
@@ -315,7 +315,7 @@ const country: Template<TemplateRenderProps> = ({
             dm_directoryParents.map((root: any) => {
               if (root.meta.entityType.id == "ce_root") {
                 detlslug =
-                  "/" +
+                  
                   document.meta.locale +
                   "/" +
                   root.slug +
