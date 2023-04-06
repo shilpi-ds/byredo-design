@@ -83,7 +83,7 @@ export const config: TemplateConfig = {
       "c_title",
       "c_readMore",
       "description",
-"dm_directoryParents",
+//"dm_directoryParents",
       "c_photoGalleryTitle",
       "c_locationServices.name",
       /*FAQ's*/
@@ -319,7 +319,7 @@ const Location: Template<ExternalApiRenderData> = ({
     slug,
     mainPhone,
     __meta,
-    dm_directoryParents,
+    //dm_directoryParents,
     additionalHoursText,
     yextDisplayCoordinate,
     timezone,
@@ -452,12 +452,12 @@ const Location: Template<ExternalApiRenderData> = ({
             ByredoLogo={_site.c_byradoLogo}
             ByredoLinks={_site.c_headerMenus}
           />
-           <BreadCrumbs
+           {/* <BreadCrumbs
             name={name}
             parents={dm_directoryParents}
             address={address}
             locale={document.meta.locale}
-          ></BreadCrumbs> 
+          ></BreadCrumbs>  */}
           <LocationInformation
             prop={hours}
             coords={yextDisplayCoordinate}
