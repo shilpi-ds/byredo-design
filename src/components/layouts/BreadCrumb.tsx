@@ -35,7 +35,8 @@ const BreadCrumbs = (props: data) => {
             slug: parents[i].slug,
             childrenCount: parents[i].dm_directoryChildrenCount,
           });
-        } else if (parents[i]?.meta?.entityType?.id == "ce_region") {
+        } 
+        else if (parents[i]?.meta?.entityType?.id == "ce_region") {
           const regionSlugPrifix = [];
           for (let r = 0; r < parents.length; r++) {
             if (
@@ -65,34 +66,44 @@ const BreadCrumbs = (props: data) => {
             slug: regionSlugPrifix.join("/") + "/" + regionSlug,
             childrenCount: parents[i].dm_directoryChildrenCount,
           });
-        } else if (parents[i]?.meta?.entityType.id == "ce_city") {
-          const citySlugPrifix = [];
-          for (let c = 0; c < parents.length; c++) {
-            if (
-              parents[c]?.meta?.entityType.id != "ce_city" &&
-              parents[c].meta.entityType.id != "ce_root"
-            ) {
-              if (typeof parents[c].slug == "undefined") {
-                citySlugPrifix.push(
-                  slugify(parents[c].id + " " + parents[c].name)
-                );
-              } else {
-                citySlugPrifix.push(parents[c].slug);
-              }
-            }
-          }
+        } 
+        // else if (parents[i]?.meta?.entityType.id == "ce_city") {
+        //   const citySlugPrifix = [];
+        //   for (let c = 0; c < parents.length; c++) {
+        //     if (
+        //       parents[c]?.meta?.entityType.id != "ce_city" &&
+        //       parents[c].meta.entityType.id != "ce_root"
+        //     ) {
+        //       if (typeof parents[c].slug == "undefined") {
+        //         citySlugPrifix.push(
+        //           slugify(parents[c].id + " " + parents[c].name)
+        //         );
+        //       } else {
+        //         citySlugPrifix.push(parents[c].slug);
+        //       }
+        //     }
+        //   }
 
-          let citySlug = "";
-          if (typeof parents[i].slug == "undefined") {
-            citySlug = slugify(parents[i].id + " " + parents[i].name);
-          } else {
-            citySlug = parents[i].slug;
-          }
+        //   let citySlug = "";
+        //   if (typeof parents[i].slug == "undefined") {
+        //     citySlug = slugify(parents[i].id + " " + parents[i].name);
+        //   } else {
+        //     citySlug = parents[i].slug;
+        //   }
 
+        //   data.push({
+        //     name: parents[i].name,
+        //     slug: citySlugPrifix.join("/") + "/" + citySlug,
+        //     childrenCount: parents[i].dm_directoryChildrenCount,
+        //   });
+        // }
+        else if (parents[i].meta.entityType.id == "ce_city") {
+          parents[i].name = parents[i].name;
+          parents[i].slug =
+            parents[i - 1].slug + "/" + parents[i].slug;
           data.push({
             name: parents[i].name,
-            slug: citySlugPrifix.join("/") + "/" + citySlug,
-            childrenCount: parents[i].dm_directoryChildrenCount,
+            slug: parents[i].slug,
           });
         }
       }
