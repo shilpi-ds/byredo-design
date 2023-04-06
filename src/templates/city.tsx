@@ -322,7 +322,7 @@ const City: Template<TemplateRenderProps> = ({
       entity.id+"-"+result +
       ".html";
     } else {
-      url = "/" +country + "/" + finalregion + "/" + finalcity +
+      url = document.meta.locale +
       "/" +
       entity.slug?.toString() +
       ".html";
@@ -337,7 +337,7 @@ const City: Template<TemplateRenderProps> = ({
                 {/* <p className="text-center">Near by stores</p> */}
 
         <div className="flex justify-between items-center pt-3 ml-4">
-            <h5 className="underline underline-offset-8 font-bold"><Link className="inline-block notHighlight" href={url}
+            <h5 className="underline underline-offset-8 font-bold"><Link className="inline-block notHighlight" href={BaseUrl+"/"+url}
                 data-ya-track={`${entity.name}`}
                 eventName={`${entity.name}`}
                 rel="noopener noreferrer">{entity.name}</Link></h5>
@@ -351,13 +351,13 @@ const City: Template<TemplateRenderProps> = ({
         </div>
 
         <div className="flex mt-4 ml-4">
-            <img className="h-[25px]" src={loc2} alt=""/>
+            {/* <img className="h-[25px]" src={loc2} alt=""/> */}
             <p className="text-sm pl-4"><a  href={`tel:${entity.mainPhone}`}>{entity.mainPhone}</a></p>
 
         </div>
         {entity.hours?
         <div className="flex mt-4 ml-4">
-            <img className="h-[25px]" src={loc3} alt=""/>
+            {/* <img className="h-[25px]" src={loc3} alt=""/> */}
             <p className="text-sm pl-4"><OpenCloseStatus timezone={entity.timezone} hours={entity.hours} deliveryHours={entity.hours}/></p>
         </div>
         :<div className="closeddot notHighlight red-dot">
@@ -373,7 +373,7 @@ const City: Template<TemplateRenderProps> = ({
                         <div className="ctaBtn">
                             <Link
                               className="button before-icon"
-                              href={`${url}`}
+                              href={BaseUrl+"/"+url}
                             >
                               VIEW DETAILS
                             </Link>
@@ -448,7 +448,19 @@ const City: Template<TemplateRenderProps> = ({
             ByredoLogo={_site.c_byradoLogo}
             ByredoLinks={_site.c_headerMenus}
           />
-       
+        {dm_directoryParents ? (
+                        <>
+                            <BreadCrumbs
+                                name={document.name}
+                               
+                                parents={dm_directoryParents}
+                                address={""}
+                                locale={document.meta.locale}
+                            ></BreadCrumbs>
+                        </>
+                    ) : (
+                        <></>
+                    )}
   
 
          {/* <BreadCrumbs
