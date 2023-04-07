@@ -31,50 +31,34 @@ const BreadCrumbs = (props: data) => {
             childrenCount: parents[i].dm_directoryChildrenCount,
           });
         }
-        else if (parents[i].meta.entityType.id == "ce_root") {
+        if (parents[i].meta.entityType.id == "ce_root") {
           
           parents[i].name = parents[i].name;
           parents[i].slug = parents[i].slug;
         }
-        if (parents[i].meta.entityType.id == "ce_country") {
-          //console.log(parents[i].dm_directoryParents[1],"frrrrrrrrr");
-          data.push({
-            name: regionNames.of(parents[i].name),
-            slug: parents[i].dm_directoryParents[1].slug+"/"+parents[i].slug,
-            childrenCount: parents[i].dm_directoryChildrenCount,
-          }); 
-        } 
-        else if (parents[i]?.meta?.entityType?.id == "ce_region") {
-          const regionSlugPrifix = [];
-          for (let r = 0; r < parents.length; r++) {
-            if (
-              parents[r].meta.entityType.id != "ce_root" &&
-              parents[r].meta.entityType.id != "ce_region" &&
-              parents[r]?.meta?.entityType.id != "ce_city"
-            ) {
-              if (typeof parents[r].slug == "undefined") {
-                regionSlugPrifix.push(
-                  slugify(parents[r].id + " " + parents[r].name)
-                );
-              } else {
-                regionSlugPrifix.push(parents[r].slug);
-              }
-            }
+        else if (parents[i].meta.entityType.id == "ce_country") {
+          try {
+            parents[i].name = regionNames.of(parents[i].name);
+          } catch (error) {
+            parents[i].name = parents[i].name;
           }
-
-          let regionSlug = "";
-          if (typeof parents[i].slug == "undefined") {
-            regionSlug = slugify(parents[i].id + " " + parents[i].name);
-          } else {
-            regionSlug = parents[i].slug;
-          }
+          parents[i].slug =
+            parents[i - 1].slug + "/" + parents[i].slug;
 
           data.push({
             name: parents[i].name,
-            slug: regionSlugPrifix.join("/") + "/" + regionSlug,
-            childrenCount: parents[i].dm_directoryChildrenCount,
+            slug: parents[i].slug,
           });
         } 
+        else if (parents[i].meta.entityType.id == "ce_city") {
+          parents[i].name = parents[i].name;
+          parents[i].slug =
+            parents[i - 1].slug + "/" + parents[i].slug;
+          data.push({
+            name: parents[i].name,
+            slug: parents[i].slug,
+          });
+        }
         // else if (parents[i]?.meta?.entityType.id == "ce_city") {
         //   const citySlugPrifix = [];
         //   for (let c = 0; c < parents.length; c++) {
@@ -105,16 +89,7 @@ const BreadCrumbs = (props: data) => {
         //     childrenCount: parents[i].dm_directoryChildrenCount,
         //   });
         // }
-        else if (parents[i].meta.entityType.id == "ce_city") {
-          //console.log(parents[i],"iiiiii");
-          parents[i].name = parents[i].name;
-          parents[i].slug =
-            parents[i - 1].slug + "/" + parents[i].slug;
-          data.push({
-            name: parents[i].name,
-            slug: parents[i].slug,
-          });
-        }
+    
       }
       
 

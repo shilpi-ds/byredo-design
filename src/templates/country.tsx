@@ -10,6 +10,7 @@ import {
   GetHeadConfig,
   HeadConfig,
 } from "@yext/pages";
+import { useSearchActions} from "@yext/search-headless-react";
 import favicon from "../images/favicon.png";
 import { svgIcons } from "../svg icons/svgIcon";
 import Header from "../components/layouts/header";
@@ -20,6 +21,7 @@ import Continent from "../components/dm/Continent";
 import { useTranslation } from "react-i18next";
 import SearchBar from "../components/dm/SearchBar";
 import "../types/i18n.ts";
+
 import {
   AnswerExperienceConfig,
   googleMapsConfig,
@@ -30,6 +32,8 @@ import {
   AnalyticsEnableDebugging,
   AnalyticsEnableTrackingCookie,
 } from "../config/globalConfig";
+import { Wrapper } from "@googlemaps/react-wrapper";
+import SearchFile from "../components/locatorPage/SearchFile";
 
 
 /**
@@ -354,10 +358,16 @@ const country: Template<TemplateRenderProps> = ({
 //  // console.log(parents, "parent")
   return (
     <>
+     <Wrapper
+        apiKey={googleMapsConfig.googleMapsApiKey}
+        language={"en_GB"}
+        libraries={["places", "geometry"]}
+      >
       <Header
         ByredoLogo={_site.c_byradoLogo}
         ByredoLinks={_site.c_headerMenus}
       />
+
 
       <BreadCrumbs
         name={regionNames.of(name)}
@@ -375,7 +385,8 @@ const country: Template<TemplateRenderProps> = ({
                                 <SearchBar
                                     locale={document.meta.locale}
                                     _site={document._site}
-                                />
+                                /> 
+                                {/* <SearchFile></SearchFile> */}
                             </div>
                         </div>
       {dm_directoryChildren ? (
@@ -414,7 +425,9 @@ const country: Template<TemplateRenderProps> = ({
         path={updatelocale}
         _site={_site}
       />
+      </Wrapper>
     </>
+    
   );
 };
 

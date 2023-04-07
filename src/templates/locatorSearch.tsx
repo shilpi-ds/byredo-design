@@ -17,7 +17,6 @@ import {
 import Header from "../components/layouts/header";
 import { JsonLd } from "react-schemaorg";
 import favicon from "../images/favicon.png";
-import SearchFile from "../components/locatorPage/SearchFile";
 import SearchLayout from "../components/locatorPage/SearchLayout";
 import {
   AnswerExperienceConfig,
@@ -240,7 +239,6 @@ const LocatorSearch: Template<TemplateRenderProps> = ({
   const templateData = { document, __meta };
 
   const { i18n } = useTranslation();
-   console.log('i18.language', i18n.language,document.meta.locale)
   i18n.changeLanguage(`${document.meta.locale}`);
 
   const updateLocale = (locale: any) => {
@@ -289,7 +287,6 @@ const LocatorSearch: Template<TemplateRenderProps> = ({
             }
             endpoints={AnswerExperienceConfig.endpoints}
           >
-            <SearchFile />
 
             <SearchLayout _site={_Site} />
           </SearchHeadlessProvider>

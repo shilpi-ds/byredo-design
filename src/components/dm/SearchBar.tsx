@@ -51,7 +51,7 @@ const SearchBar = (props: any) => {
                 aria-label="Search bar icon"
                 id="search-location-button"
               >
-                Close
+                Search
                 {/* {svgIcons.searchClose} */}
               </button>
             </div>

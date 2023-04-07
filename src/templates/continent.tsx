@@ -5,6 +5,7 @@ import Continent from "../components/dm/Continent";
 import BreadCrumbs from "../components/layouts/BreadCrumb";
 import { useTranslation } from "react-i18next";
 import SearchBar from "../components/dm/SearchBar";
+import SearchFile from "../components/locatorPage/SearchFile";
 import { slugify } from "../config/globalConfig";
 import "../types/i18n.ts";
 import "../index.css";

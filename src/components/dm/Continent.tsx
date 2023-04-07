@@ -28,7 +28,7 @@ const Continent = (props: any) => {
     <>
     <div className="continent's mt-[30px] flex justify-center mb-[3.75rem]">
      <div className=" w-[640px] h-[470px] relative left-12">
-            <h2 className="text-[#141414] text-[40px] relative top-[0.625rem">Continent</h2>
+            <h2 className="text-[#141414] text-[40px] relative top-[0.625rem">Find Store</h2>
             <div className="absolute w-[640px] flex flex-col justify-center mt-[2rem] top-2/4 -translate-y-2/4"> 
    { props.child.map((item:any,index:any) => {
       return(

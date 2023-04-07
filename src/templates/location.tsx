@@ -97,6 +97,22 @@ export const config: TemplateConfig = {
       "c_metaDescription",
       "c_metaTitle",
       "c_robotsTag",
+
+      "dm_directoryParents.name",
+      "dm_directoryParents.slug",
+      "dm_directoryParents.meta.entityType",
+      "dm_directoryChildren.name",
+      //"dm_directoryChildren.entityId",
+      "dm_directoryChildren.address",
+      "dm_directoryChildren.slug",
+      "dm_directoryChildren.dm_directoryChildren.name",
+      "dm_directoryChildren.dm_baseEntityCount",
+      "dm_directoryChildren.dm_directoryChildren.slug",
+      "dm_directoryChildren.dm_directoryChildren.dm_baseEntityCount",
+      "dm_directoryChildren.dm_directoryChildren.meta.entityType",
+      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.name",
+      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.slug",
+      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.id"
     ],
 
     // Defines the scope of entities that qualify for this stream.
@@ -334,6 +350,9 @@ const Location: Template<ExternalApiRenderData> = ({
     c_canonicalURL,
     c_photoGalleryTitle,
     c_mapImage,
+
+    dm_directoryParents,
+    dm_directoryChildren
   } = document;
   const templateData = { document: document, __meta: __meta };
   //const { t, i18n } = useTranslation();
@@ -452,12 +471,12 @@ const Location: Template<ExternalApiRenderData> = ({
             ByredoLogo={_site.c_byradoLogo}
             ByredoLinks={_site.c_headerMenus}
           />
-           {/* <BreadCrumbs
+            <BreadCrumbs
             name={name}
             parents={dm_directoryParents}
             address={address}
             locale={document.meta.locale}
-          ></BreadCrumbs>  */}
+          ></BreadCrumbs> 
           <LocationInformation
             prop={hours}
             coords={yextDisplayCoordinate}

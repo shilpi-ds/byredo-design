@@ -4,11 +4,18 @@ import { useEffect, useState, useRef } from "react";
 import Geocode from "react-geocode";
 import { useTranslation } from "react-i18next";
 import { svgIcons } from "../../svg icons/svgIcon";
-import {AnswerExperienceConfig,googleMapsConfig,limit,} from "..//../config/globalConfig";
+import {
+  AnswerExperienceConfig,
+  googleMapsConfig,
+  limit,
+} from "..//../config/globalConfig";
 import FilterAwesome from "../locatorPage/Filter";
+import errorbox from "../../images/error-status-icon.png";
 import $ from "jquery";
+import { Link } from "@yext/pages/components";
 
-const SearchFile = () => {
+const SearchFile = (props: any) => {
+  let useLocationBound = false;
   const [centerLatitude, setCenterLatitude] = useState(
     googleMapsConfig.centerLatitude
   );
@@ -25,37 +32,52 @@ const SearchFile = () => {
   const [userShareLocation, setUserShareLocation] = useState(false);
   const searchActions = useSearchActions();
   const [isUserLocation, setIsUserLocation] = React.useState(false);
-  const [showNotFound, setShowNotFound] = useState(false);
-  const [autocomplete, setAutocomplete] =
-    useState<google.maps.places.Autocomplete>();
+  let setNotFound = props.setShowNotFound;
   let googleLib = typeof google !== "undefined" ? google : null;
 
   const onClick = () => {
+    useLocationBound = true;
     setInputValue("");
+    // setZoomlevel(4);
+    setIsUserLocation(true);
     if (navigator.geolocation) {
       const error = (error: any) => {
         if (error.code == 1) {
-          setallowLocation("Please allow your Location");
+          setallowLocation("Plaese allow your Location");
         }
-        setUserShareLocation(false);
       };
       navigator.geolocation.getCurrentPosition(
         function (position) {
           Geocode.setApiKey(googleMapsConfig.googleMapsApiKey);
           Geocode.fromLatLng(
-            position.coords.latitude.toString(),
-            position.coords.longitude.toString()
+            position.coords.latitude,
+            position.coords.longitude
           ).then(
             (response: any) => {
               if (response.results[0]) {
-                setInputValue(response.results[0].formatted_address);
+                if (inputRef.current) {
+                  inputRef.current.value =
+                    response.results[0].formatted_address;
+                }
 
-                document
-                  .getElementsByClassName("FilterSearchInput")[0]
-                  .setAttribute("value", response.results[0].formatted_address);
+                let pacInput: any = document?.getElementById("pac-input");
+                if (pacInput) {
+                  pacInput.value = response.results[0].formatted_address;
+                  pacInput.focus();
+                }
+                // const country = response.results[0].address_components.find(
+                //   (e: { types: string | string[] }) =>
+                //     e.types.includes("country")
+                // );
+
+                // if (country && country.short_name.toLowerCase() !== "gb") {
+                //   setNotFound(true);
+                // } else {
+                //   setNotFound(false);
+                // }
+
                 setallowLocation("");
-                setErrorStatus(false);
-                searchActions.setUserLocation({
+                searchActions?.setUserLocation({
                   latitude: position.coords.latitude,
                   longitude: position.coords.longitude,
                 });
@@ -66,17 +88,15 @@ const SearchFile = () => {
               setCheck(false);
             }
           );
-          setCenterLatitude(position.coords.latitude);
-          setCenterLongitude(position.coords.longitude);
 
-          searchActions.setUserLocation({
+          searchActions?.setUserLocation({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           });
-          searchActions.setVertical(AnswerExperienceConfig.verticalKey);
-          searchActions.setOffset(0);
-          searchActions.setVerticalLimit(limit);
-          searchActions.executeVerticalQuery();
+          searchActions?.setVertical(AnswerExperienceConfig.verticalKey);
+          searchActions?.setOffset(0);
+          searchActions?.setVerticalLimit(limit);
+          searchActions?.executeVerticalQuery();
         },
         error,
         {
@@ -85,50 +105,41 @@ const SearchFile = () => {
       );
     }
   };
-
-  // const Findinput = () => {
-  //   const searchKey: any = document.getElementsByClassName('FilterSearchInput');
-  //   const Search = (searchKey[0].value);
-  //   searchActions.setOffset(0);
-
-  //   if (searchKey[0].value != "") {
-  //     setInputValue("");
-  //     setErrorStatus(false);
-  //     getCoordinates(Search);
-  //   }
-  //   if (searchKey[0].value == "") {
-  //     setErrorStatus(true);
-  //   }
-  // };
-
   const Findinput = () => {
-   const searchKey = document.getElementsByClassName("FilterSearchInput");
+    const searchKey: any = document.getElementsByClassName("FilterSearchInput");
     const Search = inputRef.current?.value || "";
     setIsUserLocation(false);
-    setShowNotFound(false);
-    if (Search) {
+    setNotFound(false);
+    if (searchKey[0].value != "") {
+      setInputValue("");
+      setErrorStatus(false);
       getCoordinates(Search);
     }
-    searchActions.setOffset(0);
+    if (searchKey[0].value == "") {
+      setErrorStatus(true);
+    }
+    searchActions?.setOffset(0);
   };
+
   const Findinput2 = () => {
-   const searchKey: any = document.getElementsByClassName("FilterSearchInput");
-   const Search = inputRef.current?.value || "";
+    const searchKey: any = document.getElementsByClassName("FilterSearchInput");
+    const Search = inputRef.current?.value || "";
     setIsUserLocation(false);
     if (Search.length == 0) {
-      setShowNotFound(false);
+      setNotFound(false);
       const bounds = new google.maps.LatLngBounds();
       bounds.extend({
         lat: googleMapsConfig.centerLatitude,
         lng: googleMapsConfig.centerLongitude,
       });
-      searchActions.setVertical("locations");
-      searchActions.setQuery("");
-      searchActions.setOffset(0);
-      searchActions.setVerticalLimit(limit);
-      searchActions.executeVerticalQuery();
-      // getCoordinates(Search);
+      // searchActions.setVertical("locations");
+      // searchActions.setQuery("");
+      // searchActions.setOffset(0);
+      // searchActions.setVerticalLimit(limit);
+      // searchActions.executeVerticalQuery();
+      getCoordinates(Search);
     }
+    setErrorStatus(false);
   };
 
   function getCoordinates(address: string) {
@@ -145,43 +156,46 @@ const SearchFile = () => {
           data.results.map((res: any) => {
             const userlatitude = res.geometry.location.lat;
             const userlongitude = res.geometry.location.lng;
-           const params = { latitude: userlatitude, longitude: userlongitude };
-            searchActions.setQuery(address);
-            searchActions.setUserLocation({
+            const params = { latitude: userlatitude, longitude: userlongitude };
+            searchActions?.setQuery(address);
+            searchActions?.setUserLocation({
               latitude: userlatitude,
               longitude: userlongitude,
             });
-            searchActions.executeVerticalQuery();
-            const country = res.address_components.find(
-              (e: { types: string | string[] }) => e.types.includes("country")
-            );
+            searchActions?.executeVerticalQuery();
+            // const country = res.address_components.find(
+            //   (e: { types: string | string[] }) => e.types.includes("country")
+            // );
 
-            if (country && country.short_name.toLowerCase() !== "gb") {
-              setShowNotFound(true);
-            } else {
-              setShowNotFound(false);
-            }
+            // if (country && country.short_name.toLowerCase() !== "gb") {
+            //   setShowNot(true);
+            // } else {
+            //   setShowNot(false);
+            // }
           });
         } else {
-          searchActions.setUserLocation({
+          searchActions?.setUserLocation({
             latitude: centerLatitude,
             longitude: centerLongitude,
           });
-          searchActions.setQuery(address);
-          searchActions.executeVerticalQuery();
+
+          searchActions?.setQuery(address);
+          searchActions?.executeVerticalQuery();
           if (inputRef.current?.value) {
-            setShowNotFound(true);
+            setNotFound(true);
+            setErrorStatus(false);
           }
         }
       });
   }
 
-
+  const [autocomplete, setAutocomplete] =
+    useState<google.maps.places.Autocomplete>();
   useEffect(() => {
     if (googleLib && typeof google.maps === "object") {
-      const pacInput: any = document?.getElementById("pac-input");
-      console.log(pacInput,"pacInput")
-      const options: any = {
+      let pacInput: any = document?.getElementById("pac-input");
+
+      let options: any = {
         options: {
           language: ["en_GB", "fr-FR", "it-IT", "ja-JP", "de-DE"],
           //types: ["(regions)"],
@@ -194,20 +208,18 @@ const SearchFile = () => {
       );
       if (autoComplete) {
         function pacSelectFirst(input: HTMLInputElement) {
-         const _addEventListener = input.addEventListener;
-
+          const _addEventListener = input.addEventListener;
           function addEventListenerWrapper(type: string, listener: any) {
             if (type == "keydown") {
-             const orig_listener = listener;
+              const orig_listener = listener;
 
               listener = function (event: { which: number }) {
-               const suggestion_selected = $(".pac-item-selected").length > 0;
-
+                const suggestion_selected = $(".pac-item-selected").length > 0;
                 if (
                   (event.which == 13 || event.which == 9) &&
                   !suggestion_selected
                 ) {
-                 const simulated_downarrow = $.Event("keydown", {
+                  const simulated_downarrow = $.Event("keydown", {
                     keyCode: 40,
                     which: 40,
                   });
@@ -252,11 +264,11 @@ const SearchFile = () => {
           function () {
             const searchKey: any = pacInput.value;
             const place = autoComplete.getPlace();
-            console.log("searchKey", searchKey, place);
+            //console.log("searchKey", searchKey, place);
             if (!place.address_components) {
-              setShowNotFound(true);
+              setNotFound(true);
             } else {
-              setShowNotFound(false);
+              setNotFound(false);
             }
             if (searchKey) {
               getCoordinates(searchKey);
@@ -272,8 +284,6 @@ const SearchFile = () => {
     };
   }, [googleLib]);
 
-
-  
   const { t } = useTranslation();
   return (
     <>
@@ -303,13 +313,9 @@ const SearchFile = () => {
             id="pac-input"
             type="text"
             ref={inputRef}
-            value={inputvalue}
             placeholder={t("Enter address, city, postalcode")}
             className="FilterSearchInput"
-            onChange={(e) =>
-             { Findinput2();
-               setInputValue(e.target.value)
-              }}
+            onChange={() => Findinput2()}
             onKeyDown={(evt) => {
               if (evt.key === "Enter") {
                 Findinput();
@@ -320,18 +326,15 @@ const SearchFile = () => {
                 evt.key === "Delete"
               ) {
                 Findinput2();
-               
               }
             }}
           />
-          <div className="flex justify-between">
-            {/* Filter */}
-            <FilterAwesome
-              customCssClasses={{ container: "filter-items" }}
-              defaultExpanded={true}
-            ></FilterAwesome>
-          </div>
-
+          {errorstatus && (
+            <span className="Error-msg">
+              <img src={errorbox} />
+              Please fill out this field
+            </span>
+          )}
           {/* Search icon Button  */}
           <button
             className="button"
@@ -343,6 +346,20 @@ const SearchFile = () => {
           >
             {svgIcons.Searchbaricon}
           </button>
+          {/* <div className="flex justify-between">Filter</div> */}
+        </div>
+        <div className="flex items-start justify-between">
+          <FilterAwesome
+            customCssClasses={{ container: "filter-items" }}
+            defaultExpanded={true}
+          ></FilterAwesome>
+          <div className="ctaBtn">
+            <Link className="onhighLight button" href="#">
+              {props.c_allAddressCTA
+                ? props.c_allAddressCTA
+                : t("All Addresses")}
+            </Link>
+          </div>
         </div>
       </div>
     </>

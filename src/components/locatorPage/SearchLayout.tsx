@@ -13,6 +13,7 @@ import { GoogleMaps } from "./GoogleMaps";
 import LocationCard from "./LocationCard";
 import ResultsCount from "./ResultsCount";
 import ViewMore from "./ViewMore";
+import SearchFile from "./SearchFile";
 let params1: any = {
   latitude: googleMapsConfig.centerLatitude,
   longitude: googleMapsConfig.centerLongitude,
@@ -98,6 +99,9 @@ const SearchLayout = (props: any): JSX.Element => {
       >
       <div className="locator-full-width place-content-center">
         <div className="locator-container">
+          <SearchFile
+          setShowNotFound={setShowNotFound}
+          />
           {/* Map view and List View CTA in mobile responsive  */}
           <div className="mobile-btns">
             <Link
