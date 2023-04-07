@@ -18,6 +18,7 @@ import BreadCrumbs from "../components/layouts/BreadCrumb";
 import { slugify } from "../config/globalConfig";
 import Continent from "../components/dm/Continent";
 import { useTranslation } from "react-i18next";
+import SearchBar from "../components/dm/SearchBar";
 import "../types/i18n.ts";
 import {
   AnswerExperienceConfig,
@@ -368,6 +369,15 @@ const country: Template<TemplateRenderProps> = ({
        {/* <div className="directory-country py-5 lg:py-[60px]">
             <Continent child={c_children} locale={document.meta.locale}/>
           </div> */}
+
+<div className="search-form">
+                            <div className="text-center max-w-[38.125rem] mx-auto relative">
+                                <SearchBar
+                                    locale={document.meta.locale}
+                                    _site={document._site}
+                                />
+                            </div>
+                        </div>
       {dm_directoryChildren ? (
         <>
 

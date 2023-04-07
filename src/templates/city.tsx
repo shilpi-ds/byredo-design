@@ -1,5 +1,6 @@
 import * as React from "react";
 import getDirectionUrl from "../components/commons/GetDirection";
+import SearchBar from "../components/dm/SearchBar";
 //import constant from "../constant";
 import favicon from "../images/favicon.png"
 import Header from "../components/layouts/header";
@@ -487,7 +488,14 @@ const City: Template<TemplateRenderProps> = ({
                     ) : (
                         <></>
                     )}
-  
+     <div className="search-form">
+                            <div className="text-center max-w-[38.125rem] mx-auto relative">
+                                <SearchBar
+                                    locale={document.meta.locale}
+                                    _site={document._site}
+                                />
+                            </div>
+                        </div>
 
          {/* <BreadCrumbs
           name={name}

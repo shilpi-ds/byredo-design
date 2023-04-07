@@ -4,6 +4,7 @@ import Footer from "../components/layouts/footer";
 import Continent from "../components/dm/Continent";
 import BreadCrumbs from "../components/layouts/BreadCrumb";
 import { useTranslation } from "react-i18next";
+import SearchBar from "../components/dm/SearchBar";
 import { slugify } from "../config/globalConfig";
 import "../types/i18n.ts";
 import "../index.css";
@@ -116,7 +117,14 @@ const Root: Template<TemplateRenderProps> = ({
                         parents={undefined}
                         //mainparent={document._site.c_relatedContinent}
                     />
-        
+         <div className="search-form">
+                            <div className="text-center max-w-[38.125rem] mx-auto relative">
+                                <SearchBar
+                                    locale={document.meta.locale}
+                                    _site={document._site}
+                                />
+                            </div>
+                        </div>
           <div className="directory-country py-5 lg:py-[60px]">
             <Continent child={c_children} locale={document.meta.locale} document={document.meta}/>
           </div>
