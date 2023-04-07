@@ -1,8 +1,9 @@
 import * as React from "react";
 import { useState } from 'react';
+import { slugify,BaseUrl } from "../../config/globalConfig";
 type props = {
   prop: any;
-  promo: any;
+
   
 };
 
@@ -13,7 +14,7 @@ type props = {
  */
 
 const Continent = (props: any) => {
-  console.log(props,"child")
+  console.log(props,"childdddddddddd")
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
   const [section, setSection] = useState(0);
   const [isActive, setIsActive] = useState('continent');
@@ -23,10 +24,9 @@ const Continent = (props: any) => {
   };
 
 
-
  return (
     <>
-    <div className="faq's mt-[30px] flex justify-center mb-[3.75rem]">
+    <div className="continent's mt-[30px] flex justify-center mb-[3.75rem]">
      <div className=" w-[640px] h-[470px] relative left-12">
             <h2 className="text-[#141414] text-[40px] relative top-[0.625rem">Continent</h2>
             <div className="absolute w-[640px] flex flex-col justify-center mt-[2rem] top-2/4 -translate-y-2/4"> 
@@ -62,23 +62,50 @@ const Continent = (props: any) => {
 
        })}
        </div></div>
-       <div className="bg-[#F1F6FA] w-[648px] h-[472px] rounded-2xl flex mt-[2rem]">
+       <div className="bg-[#F1F6FA] w-[648px] h-[472px] rounded-2xl block mt-[2rem] ">
                 {props.child[section].dm_directoryChildren.map((res: any, index: any) => {
                   
                   return (
                     <>
                       
                       
-            <div className="w-[472px] inline-block right-0 mt-[2.5rem] ml-[9rem]">
+            <div className="inline-block right-0 mt-[2.5rem] ml-[9rem]">
          
               <p className="pt-10">
               <a href={"/" +props.locale +"/" +props.child[section].slug +"/" +res.slug +".html"}>
                 {regionNames.of(res.name)}
                 </a></p>
             </div>
-                    </>
+
+            
+                 <div className="all-cities flex gap-x-12">  
+                   {res.dm_directoryChildren.map((ress: any, index: any) => {
+                  
+                    return (
+                      <>
+                        
+                        
+              <div className="city">
+           
+                <p className="pt-10">
+                <a href={"/" +props.locale +"/" +props.child[section].slug+"/"+res.slug +"/" +ress.slug +".html"}>
+                  {ress.name}
+                  <sup className="ml-0.5">
+              {ress.dm_baseEntityCount ? ress.dm_baseEntityCount : ""}
+            </sup>
+                  </a></p>
+              </div>
+            
+              
+                      </>
+                    );
+                  })} 
+                 
+                  </div>
+                   </>
                   );
                 })}
+
   </div>
           
            </div>

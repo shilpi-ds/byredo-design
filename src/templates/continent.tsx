@@ -33,6 +33,9 @@ export const config: TemplateConfig = {
       "c_children.slug",
       "c_children.dm_directoryChildren.name",
       "c_children.dm_directoryChildren.slug",
+      "c_children.dm_directoryChildren.dm_directoryChildren.name",
+      "c_children.dm_directoryChildren.dm_directoryChildren.slug",
+      "c_children.dm_directoryChildren.dm_directoryChildren.dm_baseEntityCount",
       "c_children.dm_directoryChildren.dm_baseEntityCount",
     ],
     filter: {
@@ -115,7 +118,7 @@ const Root: Template<TemplateRenderProps> = ({
                     />
         
           <div className="directory-country py-5 lg:py-[60px]">
-            <Continent child={c_children} locale={document.meta.locale}/>
+            <Continent child={c_children} locale={document.meta.locale} document={document.meta}/>
           </div>
         
       

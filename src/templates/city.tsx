@@ -97,7 +97,7 @@ export const config: TemplateConfig = {
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
   //let uniqueId = generateUniqueId();
-  console.log(document.dm_directoryParents,"dmmmmmmmmmmm");
+  //console.log(document.dm_directoryParents,"dmmmmmmmmmmm");
   if (document.dm_directoryParents) {
       document.dm_directoryParents.map((i: any) => {
           if (i.meta.entityType.id == "ce_root") {
@@ -108,11 +108,11 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
               currentUrl = url;
           }
       });
-      console.log(`${document.meta.locale}/${currentUrl}`,"gfgfdgdfg");
+      //console.log(`${document.meta.locale}/${currentUrl}`,"gfgfdgdfg");
       return `${document.meta.locale}/${currentUrl}`;
   } else {
-    console.log(`${document.meta.locale
-    }/${document.slug.toString()}.html`,"aaaaaaaaaaaaa");
+    //console.log(`${document.meta.locale
+    //}/${document.slug.toString()}.html`,"aaaaaaaaaaaaa");
       return `${document.meta.locale
           }/${document.slug.toString()}.html`;
   }
